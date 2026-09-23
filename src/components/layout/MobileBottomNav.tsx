@@ -25,14 +25,14 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           }`}
         >
           <Home className="w-5 h-5" />
-          <span className="text-[10px]">Home</span>
+          <span className="text-[10px]">หน้าหลัก</span>
         </button>
 
         {/* Center Floating QR Button */}
         <button
           onClick={onOpenQrScanner}
           className="relative -top-4 w-13 h-13 rounded-full bg-gradient-to-tr from-spu-purple to-spu-plum text-white shadow-spu-lg flex items-center justify-center active:scale-95 transition-transform ring-4 ring-white"
-          title="Open QR Scanner"
+          title="เปิดสแกน QR Code"
           style={{ width: '3.25rem', height: '3.25rem' }}
         >
           <QrCode className="w-6 h-6 text-white" />
@@ -53,7 +53,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
               </span>
             )}
           </div>
-          <span className="text-[10px]">My Reports</span>
+          <span className="text-[10px]">ติดตามงาน</span>
         </button>
       </div>
     </div>

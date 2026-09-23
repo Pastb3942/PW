@@ -22,7 +22,7 @@ const EQUIPMENT_OPTIONS: EquipmentOption[] = [
   {
     id: 'AIR_CONDITIONER',
     name: 'เครื่องปรับอากาศ',
-    nameEn: 'Air Conditioner',
+    nameEn: 'แอร์ / ระบบทำความเย็น',
     desc: 'น้ำหยด, ไม่เย็น, เสียงดัง, รีโมทเสีย',
     icon: AirVent,
     color: 'text-sky-600',
@@ -32,7 +32,7 @@ const EQUIPMENT_OPTIONS: EquipmentOption[] = [
   {
     id: 'PROJECTOR_AV',
     name: 'โปรเจกเตอร์ / ระบบภาพและเสียง',
-    nameEn: 'Projector & AV',
+    nameEn: 'โปรเจกเตอร์และโสตทัศน์',
     desc: 'ภาพไม่ติด, สีเพี้ยน, ลำโพงไม่ดัง, สาย HDMI',
     icon: Projector,
     color: 'text-amber-600',
@@ -42,7 +42,7 @@ const EQUIPMENT_OPTIONS: EquipmentOption[] = [
   {
     id: 'ELECTRICAL_PLUGS',
     name: 'ระบบไฟฟ้า / ปลั๊กไฟ / หลอดไฟ',
-    nameEn: 'Electrical & Plugs',
+    nameEn: 'ปลั๊กไฟและแสงสว่าง',
     desc: 'ปลั๊กไฟช็อต, ไฟไม่เข้า, หลอดไฟกระพริบ/ขาด',
     icon: Zap,
     color: 'text-rose-600',
@@ -52,7 +52,7 @@ const EQUIPMENT_OPTIONS: EquipmentOption[] = [
   {
     id: 'FURNITURE',
     name: 'ครุภัณฑ์ / โต๊ะ / เก้าอี้',
-    nameEn: 'Furniture & Fixtures',
+    nameEn: 'โต๊ะ เก้าอี้ และเฟอร์นิเจอร์',
     desc: 'เก้าอี้หัก/ล้อหลุด, โต๊ะโยก, ประตู/หน้าต่างชำรุด',
     icon: Armchair,
     color: 'text-emerald-600',
@@ -62,7 +62,7 @@ const EQUIPMENT_OPTIONS: EquipmentOption[] = [
   {
     id: 'LAB_COMPUTERS',
     name: 'คอมพิวเตอร์ห้องปฏิบัติการ',
-    nameEn: 'Lab Computers',
+    nameEn: 'คอมพิวเตอร์และอุปกรณ์ต่อพ่วง',
     desc: 'เปิดไม่ติด, จอดำ, เมาส์/คีย์บอร์ดเสีย, ปัญหาระบบ LAN',
     icon: Monitor,
     color: 'text-indigo-600',

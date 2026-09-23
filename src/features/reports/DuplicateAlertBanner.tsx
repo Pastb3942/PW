@@ -56,7 +56,16 @@ export const DuplicateAlertBanner: React.FC<DuplicateAlertBannerProps> = ({
               hour: '2-digit',
               minute: '2-digit'
             })}{' '}
-            น. สถานะปัจจุบัน: <strong>{existingTicket.status}</strong>
+            น. สถานะปัจจุบัน:{' '}
+            <strong>
+              {existingTicket.status === 'IN_PROGRESS'
+                ? 'กำลังดำเนินการ'
+                : existingTicket.status === 'RESOLVED'
+                ? 'ซ่อมเสร็จสิ้น'
+                : existingTicket.status === 'ACKNOWLEDGED'
+                ? 'รับเรื่องแล้ว'
+                : 'รอรับเรื่อง'}
+            </strong>
           </p>
 
           <p className="text-xs text-amber-900/80 font-medium mt-1">

@@ -89,13 +89,13 @@ export function App() {
           {/* Mobile Screen Header */}
           {currentScreen !== 'tech' && currentScreen !== 'resolve' && (
             <MobileHeader
-              title="SPU Facility Fix"
+              title="ระบบแจ้งซ่อม SPU"
               subtitle={
                 currentScreen === 'home'
-                  ? 'Home'
+                  ? 'หน้าหลัก'
                   : currentScreen === 'submit'
-                  ? 'New Issue Form'
-                  : 'My Reports'
+                  ? 'แบบฟอร์มแจ้งซ่อม'
+                  : 'รายการแจ้งซ่อมของฉัน'
               }
               unreadCount={unreadEmailCount}
               onOpenMailbox={() => {

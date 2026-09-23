@@ -90,7 +90,7 @@ export const QrScannerModal: React.FC<QrScannerModalProps> = ({ isOpen, onClose,
             }`}
           >
             <Building2 className="w-4 h-4" />
-            เลือกห้องทดสอบ (Quick Test)
+            เลือกห้องทดสอบ
           </button>
         </div>
 
@@ -131,26 +131,26 @@ export const QrScannerModal: React.FC<QrScannerModalProps> = ({ isOpen, onClose,
             {/* Quick action buttons for demo simulation */}
             <div className="w-full mt-3 pt-3 border-t border-slate-100">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 text-center">
-                จำลองผลการสแกนทันที (Demo Shortcuts):
+                จำลองผลการสแกนทันที:
               </span>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => {
-                    onSelectRoom('ROOM-ENG-304');
+                    onSelectRoom('ROOM-SPU-11-502');
                     onClose();
                   }}
                   className="px-2.5 py-2 bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 rounded-lg text-xs font-medium text-slate-700 transition-all text-left truncate"
                 >
-                  📍 ห้อง 304 (วิศวะ)
+                  📍 ห้อง 11-502 (อาคาร 11)
                 </button>
                 <button
                   onClick={() => {
-                    onSelectRoom('ROOM-COM-405');
+                    onSelectRoom('ROOM-SPU-5-301');
                     onClose();
                   }}
                   className="px-2.5 py-2 bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 rounded-lg text-xs font-medium text-slate-700 transition-all text-left truncate"
                 >
-                  📍 ห้อง 405 (ศูนย์คอม)
+                  📍 ห้อง 5-301 (อาคาร 5)
                 </button>
               </div>
             </div>

@@ -60,7 +60,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
           ) : (
             <>
               <Share2 className="w-4 h-4" />
-              แชร์ลิงก์ติดตามงาน (No-Login)
+              แชร์ลิงก์ติดตามงาน (ไม่ต้องล็อกอิน)
             </>
           )}
         </button>
@@ -112,10 +112,10 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
           <div className="flex items-center gap-2">
             <User className="w-4 h-4 text-brand-600 shrink-0" />
             <div>
-              <div className="text-slate-400 font-medium">ผู้แจ้ง (Student)</div>
+              <div className="text-slate-400 font-medium">ผู้แจ้ง</div>
               <div className="font-bold text-slate-800">{displayEmail}</div>
               {tokenValid && (
-                <div className="text-[10px] text-emerald-600 font-semibold">ยืนยันสิทธิ์ผ่าน Token</div>
+                <div className="text-[10px] text-emerald-600 font-semibold">ยืนยันสิทธิ์ผ่านโทเคนเรียบร้อย</div>
               )}
             </div>
           </div>
@@ -139,7 +139,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
       <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
         <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
           <Camera className="w-4 h-4 text-brand-600" />
-          หลักฐานภาพถ่าย (Visual Evidence)
+          หลักฐานภาพถ่าย
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -147,7 +147,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
           <div className="space-y-2">
             <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-rose-500"></span>
-              ภาพถ่ายตอนแจ้งซ่อม (Before Issue)
+              ภาพถ่ายตอนแจ้งซ่อม (ก่อนซ่อม)
             </span>
             <div className="rounded-xl overflow-hidden bg-slate-900 aspect-video flex items-center justify-center border border-slate-200 shadow-inner">
               <img
@@ -162,7 +162,7 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
           <div className="space-y-2">
             <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              ภาพถ่ายยืนยันหลังการซ่อมเสร็จ (Resolution Proof)
+              ภาพถ่ายยืนยันหลังการซ่อมเสร็จ (หลักฐานการปิดงาน)
             </span>
             {ticket.resolutionProofPhotoUrl ? (
               <div className="rounded-xl overflow-hidden bg-slate-900 aspect-video flex items-center justify-center border-2 border-emerald-300 shadow-inner">
@@ -198,34 +198,45 @@ export const TicketDetailView: React.FC<TicketDetailViewProps> = ({ ticket, onBa
       <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
         <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
           <Clock className="w-4 h-4 text-brand-600" />
-          ประวัติการดำเนินงานอย่างละเอียด (Audit Event Logs)
+          ประวัติการดำเนินงานอย่างละเอียด (บันทึกประวัติ)
         </h3>
 
         <div className="space-y-3 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-100">
-          {ticket.events.map((evt) => (
-            <div key={evt.id} className="relative flex items-start gap-3.5 pl-1 text-xs">
-              <div className="w-5 h-5 rounded-full bg-brand-100 text-brand-700 border-2 border-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-sm">
-                •
-              </div>
-              <div className="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <div className="flex items-center justify-between flex-wrap gap-1">
-                  <span className="font-bold text-slate-800">{evt.action}</span>
-                  <span className="text-[11px] text-slate-400">
-                    {new Date(evt.timestamp).toLocaleString('th-TH')}
-                  </span>
+          {ticket.events.map((evt) => {
+            const actorTypeThai =
+              evt.actorType === 'STUDENT'
+                ? 'นักศึกษา'
+                : evt.actorType === 'TECHNICIAN'
+                ? 'ช่างเทคนิค'
+                : evt.actorType === 'ADMIN'
+                ? 'ผู้ดูแลระบบ'
+                : 'ระบบ';
+
+            return (
+              <div key={evt.id} className="relative flex items-start gap-3.5 pl-1 text-xs">
+                <div className="w-5 h-5 rounded-full bg-brand-100 text-brand-700 border-2 border-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-sm">
+                  •
                 </div>
-                <div className="text-slate-600 mt-0.5">
-                  โดย: <span className="font-medium text-slate-800">{evt.actorName}</span>{' '}
-                  <span className="text-[10px] text-slate-400 uppercase">({evt.actorType})</span>
-                </div>
-                {evt.note && (
-                  <div className="text-slate-500 mt-1 italic bg-white p-2 rounded border border-slate-100">
-                    "{evt.note}"
+                <div className="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <div className="flex items-center justify-between flex-wrap gap-1">
+                    <span className="font-bold text-slate-800">{evt.action}</span>
+                    <span className="text-[11px] text-slate-400">
+                      {new Date(evt.timestamp).toLocaleString('th-TH')}
+                    </span>
                   </div>
-                )}
+                  <div className="text-slate-600 mt-0.5">
+                    โดย: <span className="font-medium text-slate-800">{evt.actorName}</span>{' '}
+                    <span className="text-[10px] text-slate-400 uppercase">({actorTypeThai})</span>
+                  </div>
+                  {evt.note && (
+                    <div className="text-slate-500 mt-1 italic bg-white p-2 rounded border border-slate-100">
+                      "{evt.note}"
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

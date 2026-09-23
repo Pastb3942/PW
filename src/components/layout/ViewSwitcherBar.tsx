@@ -19,11 +19,11 @@ export const ViewSwitcherBar: React.FC<ViewSwitcherBarProps> = ({
   unreadEmailCount
 }) => {
   const screens = [
-    { id: 'home', title: '1. Hub (Home)', icon: '📱' },
-    { id: 'submit', title: '2. Issue Form', icon: '📝' },
-    { id: 'track', title: '3. My Reports', icon: '🔍' },
-    { id: 'tech', title: '4. Tech Queue', icon: '🔧' },
-    { id: 'resolve', title: '5. Job Resolution', icon: '✅' },
+    { id: 'home', title: '1. หน้าหลัก', icon: '📱' },
+    { id: 'submit', title: '2. แบบฟอร์มแจ้งซ่อม', icon: '📝' },
+    { id: 'track', title: '3. ติดตามสถานะ', icon: '🔍' },
+    { id: 'tech', title: '4. คิวงานช่าง', icon: '🔧' },
+    { id: 'resolve', title: '5. บันทึกผลการซ่อม', icon: '✅' },
   ] as const;
 
   return (
@@ -32,7 +32,7 @@ export const ViewSwitcherBar: React.FC<ViewSwitcherBarProps> = ({
         {/* Screen Switcher Tabs */}
         <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-0.5">
           <span className="font-extrabold text-[11px] text-pink-400 mr-1.5 shrink-0 hidden sm:inline">
-            MOCKUP SCREENS:
+            หน้าจอจำลอง:
           </span>
           {screens.map((s) => {
             const active = currentScreen === s.id;
@@ -58,17 +58,17 @@ export const ViewSwitcherBar: React.FC<ViewSwitcherBarProps> = ({
           <button
             onClick={onToggleFrame}
             className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-[11px] flex items-center gap-1.5 transition-colors"
-            title="Toggle Phone Frame View"
+            title="สลับมุมมองกรอบมือถือ / เต็มจอ"
           >
             {isMobileFrame ? (
               <>
                 <Monitor className="w-3.5 h-3.5 text-pink-400" />
-                <span className="hidden md:inline">Full Width</span>
+                <span className="hidden md:inline">เต็มจอ</span>
               </>
             ) : (
               <>
                 <Smartphone className="w-3.5 h-3.5 text-pink-400" />
-                <span className="hidden md:inline">Mobile Frame</span>
+                <span className="hidden md:inline">กรอบมือถือ</span>
               </>
             )}
           </button>
@@ -78,7 +78,7 @@ export const ViewSwitcherBar: React.FC<ViewSwitcherBarProps> = ({
             className="relative px-2.5 py-1 rounded-lg bg-gradient-to-r from-purple-900 to-pink-900 hover:from-purple-800 hover:to-pink-800 text-pink-200 font-bold text-[11px] flex items-center gap-1.5 transition-colors border border-pink-700/50"
           >
             <Mail className="w-3.5 h-3.5" />
-            <span>Simulated Mailbox</span>
+            <span>กล่องอีเมลจำลอง</span>
             {unreadEmailCount > 0 && (
               <span className="w-4 h-4 rounded-full bg-rose-600 text-white text-[9px] font-black flex items-center justify-center">
                 {unreadEmailCount}

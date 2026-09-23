@@ -37,12 +37,12 @@ interface CategoryCard {
 }
 
 const CATEGORIES: CategoryCard[] = [
-  { id: 'AIR_CONDITIONER', label: 'Air Condition...', icon: AirVent },
-  { id: 'LIGHTS_ELECTRICAL', label: 'Lights / Ele...', icon: Lightbulb },
-  { id: 'SANITARY', label: 'Sanitary / T...', icon: Wrench },
-  { id: 'DESK_CHAIR', label: 'Desk & Chair', icon: Armchair },
-  { id: 'PROJECTOR_PC', label: 'Projector / PC', icon: Video },
-  { id: 'OTHER_ISSUE', label: 'Other Issue', icon: Settings }
+  { id: 'AIR_CONDITIONER', label: 'เครื่องปรับอากาศ (แอร์)', icon: AirVent },
+  { id: 'LIGHTS_ELECTRICAL', label: 'ระบบไฟฟ้า / ปลั๊ก', icon: Lightbulb },
+  { id: 'SANITARY', label: 'สุขภัณฑ์ / ประปา', icon: Wrench },
+  { id: 'DESK_CHAIR', label: 'โต๊ะและเก้าอี้เรียน', icon: Armchair },
+  { id: 'PROJECTOR_PC', label: 'โปรเจกเตอร์ / โสตฯ', icon: Video },
+  { id: 'OTHER_ISSUE', label: 'ปัญหาอื่นๆ', icon: Settings }
 ];
 
 export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
@@ -57,7 +57,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
   const [category, setCategory] = useState<EquipmentCategory>('AIR_CONDITIONER');
   const [urgency, setUrgency] = useState<UrgencyLevel>('NORMAL');
   const [description, setDescription] = useState(
-    'Water leaking from AC vent onto computer desk 14. Loud humming vibration sound since 9:00 AM lecture started.'
+    'น้ำแอร์หยดลงโต๊ะคอมพิวเตอร์แถว 14 มีเสียงสั่นดังผิดปกติตั้งแต่เริ่มเรียนช่วง 09:00 น.'
   );
   const [email, setEmail] = useState('praew.suk@spu.ac.th');
   const [photos, setPhotos] = useState<string[]>([AC_LEAK_PHOTO]);
@@ -70,7 +70,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
       const result = await compressClientImage(file, 1200, 1200, 0.75);
       setPhotos((prev) => [...prev.slice(0, 2), result.dataUrl]);
     } catch (e) {
-      alert('Photo compression failed');
+      alert('การบีบอัดรูปภาพขัดข้อง');
     } finally {
       setCompressing(false);
     }
@@ -92,7 +92,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         title: description.slice(0, 48),
         description,
         photoUrl: photos[0] || AC_LEAK_PHOTO,
-        studentName: 'Praew Suk.',
+        studentName: 'แพรว สุขสมบูรณ์',
         studentEmail: email,
         urgency
       });
@@ -119,10 +119,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
           onClick={onBack}
           className="text-xs font-bold text-spu-pink hover:underline flex items-center gap-1"
         >
-          ← Back to Hub
+          ← กลับหน้าหลัก
         </button>
         <span className="px-3 py-0.5 rounded-full bg-spu-lightPink text-spu-pink text-[11px] font-extrabold border border-spu-borderPink">
-          Step 1 of 2
+          ขั้นตอนที่ 1 จาก 2
         </span>
       </div>
 
@@ -130,10 +130,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
       <div>
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-black text-slate-900 tracking-tight">
-            Report an Issue
+            แจ้งซ่อมอุปกรณ์
           </h1>
           <span className="text-[11px] text-slate-400 font-semibold">
-            Estimated: 1 min
+            ใช้เวลาประมาณ: 1 นาที
           </span>
         </div>
         {/* Progress Line */}
@@ -152,10 +152,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
           <div className="flex items-center justify-between gap-1">
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">
-                AUTO-DETECTED LOCATION
+                ตำแหน่งที่ตรวจพบอัตโนมัติ
               </span>
               <span className="px-1.5 py-0.2 rounded-full bg-pink-50 text-spu-pink text-[9px] font-bold border border-pink-200">
-                ● Verified GPS
+                ● ยืนยันพิกัดแล้ว
               </span>
             </div>
             <button
@@ -163,12 +163,12 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
               onClick={onOpenQrScanner}
               className="text-xs font-bold text-spu-pink hover:underline shrink-0"
             >
-              Change
+              เปลี่ยนห้อง
             </button>
           </div>
 
           <div className="font-extrabold text-xs text-slate-900 mt-1">
-            {currentRoom.building}, Floor {currentRoom.floor}
+            {currentRoom.building}, ชั้น {currentRoom.floor}
           </div>
           <div className="text-[11px] text-slate-500">
             {currentRoom.name}
@@ -180,10 +180,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         {/* Issue Category (2x3 Grid) */}
         <div className="space-y-1.5">
           <label className="block text-xs font-black text-slate-900">
-            Issue Category <span className="text-spu-pink">*</span>
+            หมวดหมู่อุปกรณ์ที่ชำรุด <span className="text-spu-pink">*</span>
           </label>
           <p className="text-[11px] text-slate-400">
-            Select the type of facility problem
+            เลือกประเภทของปัญหาที่พบ
           </p>
 
           <div className="grid grid-cols-2 gap-2 pt-1">
@@ -226,9 +226,9 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <label className="block text-xs font-black text-slate-900">
-              Urgency Level
+              ระดับความเร่งด่วน
             </label>
-            <span className="text-[11px] text-slate-400 font-medium">Response SLA</span>
+            <span className="text-[11px] text-slate-400 font-medium">ระยะเวลาดำเนินการ (SLA)</span>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
@@ -243,10 +243,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             >
               <div className="font-extrabold text-xs text-slate-900 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-spu-plum"></span>
-                Normal
+                ปกติ
               </div>
               <div className="text-[10px] text-slate-500 mt-0.5">
-                Routine fix (12–24h)
+                งานซ่อมทั่วไป (12–24 ชม.)
               </div>
             </button>
 
@@ -261,10 +261,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             >
               <div className="font-extrabold text-xs text-red-600 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-red-600"></span>
-                Urgent
+                ด่วนมาก
               </div>
               <div className="text-[10px] text-slate-500 mt-0.5">
-                Hazard, water leak, class halt
+                อันตราย, น้ำรั่วซึม, รบกวนการเรียน
               </div>
             </button>
           </div>
@@ -274,10 +274,10 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <label className="block text-xs font-black text-slate-900">
-              Attach Photos or Video
+              แนบรูปถ่ายหรือวิดีโอหลักฐาน
             </label>
             <span className="text-[11px] text-slate-400">
-              Max 3 files ({photos.length} attached)
+              สูงสุด 3 รูป (แนบแล้ว {photos.length} รูป)
             </span>
           </div>
 
@@ -290,7 +290,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
               >
                 <img
                   src={imgUrl}
-                  alt={`Attached ${idx + 1}`}
+                  alt={`แนบรูป ${idx + 1}`}
                   className="w-full h-full object-cover"
                 />
                 <button
@@ -301,7 +301,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
                   <X className="w-3 h-3" />
                 </button>
                 <div className="absolute bottom-0 inset-x-0 bg-[#3B0764]/90 text-white text-[9px] font-bold text-center py-0.5">
-                  Photo {idx + 1}
+                  รูปที่ {idx + 1}
                 </div>
               </div>
             ))}
@@ -318,7 +318,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
                 />
                 <Camera className="w-5 h-5 text-spu-pink mb-1" />
                 <span className="text-[10px] font-bold text-slate-700 leading-tight">
-                  + Add Photo
+                  + เพิ่มรูปถ่าย
                 </span>
               </label>
             )}
@@ -326,9 +326,9 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             {/* Pro Tip Card */}
             <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col justify-center text-[10px] text-slate-500 leading-tight">
               <span className="font-bold text-slate-700 flex items-center gap-1 mb-1">
-                💡 Pro Tip
+                💡 ข้อแนะนำ
               </span>
-              Capturing room number stickers or barcodes speeds up repairs!
+              ถ่ายติดเลขครุภัณฑ์ สติกเกอร์ห้อง หรือ QR Code จะช่วยให้ช่างมาซ่อมได้เร็วขึ้น!
             </div>
           </div>
         </div>
@@ -337,7 +337,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <label className="block text-xs font-black text-slate-900">
-              Describe the Issue <span className="text-spu-pink">*</span>
+              รายละเอียดปัญหาที่พบ <span className="text-spu-pink">*</span>
             </label>
             <span className="text-[11px] text-slate-400">
               {description.length} / 500
@@ -350,7 +350,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full p-3 bg-white border border-slate-200 rounded-2xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-spu-pink/20 focus:border-spu-pink shadow-sm leading-relaxed"
-            placeholder="Describe what happened..."
+            placeholder="อธิบายอาการเสียหรือรายละเอียดเพิ่มเติม..."
             required
           />
         </div>
@@ -358,7 +358,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
         {/* Student / Staff SPU Email */}
         <div className="space-y-1.5">
           <label className="block text-xs font-black text-slate-900">
-            Student / Staff SPU Email <span className="text-spu-pink">*</span>
+            อีเมลนักศึกษา / บุคลากร SPU <span className="text-spu-pink">*</span>
           </label>
           <div className="relative">
             <input
@@ -372,7 +372,7 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             <Mail className="w-4 h-4 text-spu-pink absolute left-3 top-3" />
           </div>
           <p className="text-[11px] text-slate-400 leading-snug">
-            🔔 SMS and email tracking updates are dispatched automatically at every milestone.
+            🔔 ระบบจะส่งอีเมลแจ้งเตือนความคืบหน้าสถานะงานซ่อมให้ทราบโดยอัตโนมัติทุกขั้นตอน
           </p>
         </div>
 
@@ -383,11 +383,11 @@ export const SubmissionFormView: React.FC<SubmissionFormViewProps> = ({
             disabled={submitting}
             className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#4A154B] via-[#3B0764] to-[#BE185D] hover:from-[#3B0764] hover:to-[#9D174D] text-white text-xs font-black flex items-center justify-center gap-2 shadow-spu active:scale-[0.98] transition-all disabled:opacity-50"
           >
-            {submitting ? 'Submitting...' : 'Submit Report ▷'}
+            {submitting ? 'กำลังส่งข้อมูล...' : 'ส่งเรื่องแจ้งซ่อม ▷'}
           </button>
 
           <p className="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
-            <span className="text-spu-pink">⚡</span> SPU Facility Team resolves urgent lab tickets within ~30 mins.
+            <span className="text-spu-pink">⚡</span> ทีมช่างอาคารสถานที่ SPU พร้อมเข้าแก้ไขเคสด่วนภายใน ~30 นาที
           </p>
         </div>
       </form>

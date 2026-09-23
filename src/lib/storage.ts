@@ -1,10 +1,10 @@
 import { Room, Ticket, EmailNotification, TicketStatus, UrgencyLevel, EquipmentCategory } from '../types';
 import { INITIAL_ROOMS, INITIAL_TICKETS } from './mockData';
 
-const TICKETS_STORAGE_KEY = 'spu_facility_fix_tickets_v2';
-const ROOMS_STORAGE_KEY = 'spu_facility_fix_rooms_v2';
-const EMAILS_STORAGE_KEY = 'spu_facility_fix_emails_v2';
-const RECENT_TICKETS_KEY = 'spu_facility_fix_recent_v2';
+const TICKETS_STORAGE_KEY = 'spu_facility_fix_tickets_v3';
+const ROOMS_STORAGE_KEY = 'spu_facility_fix_rooms_v3';
+const EMAILS_STORAGE_KEY = 'spu_facility_fix_emails_v3';
+const RECENT_TICKETS_KEY = 'spu_facility_fix_recent_v3';
 
 export function initStorage(): void {
   if (!localStorage.getItem(TICKETS_STORAGE_KEY)) {
@@ -17,7 +17,7 @@ export function initStorage(): void {
     const initialEmail: EmailNotification = {
       id: 'MAIL-SPU-01',
       to: 'praew.suk@spu.ac.th',
-      subject: '[SPU Facility Fix] Ticket #SPU-8821: Tech Somchai K. is on site at Bldg 11, Room 11-502',
+      subject: '[แจ้งซ่อม SPU] รหัส #SPU-8821: ช่างสมชาย การช่าง ถึงหน้างานแล้วที่ อาคาร 11 ชั้น 5 ห้อง 11-502',
       type: 'IN_PROGRESS',
       ticketId: 'SPU-8821',
       ticketToken: 'ac79e41b7194f8d2983b6e8a0021c45f',
@@ -26,17 +26,17 @@ export function initStorage(): void {
       previewHtml: `
         <div style="font-family: system-ui, sans-serif; max-width: 540px; margin: 0 auto; padding: 20px; border: 1px solid #fbcfe8; border-radius: 16px; background: #ffffff;">
           <div style="background: linear-gradient(135deg, #3b0764, #be185d); color: white; padding: 16px; border-radius: 12px; text-align: center;">
-            <h2 style="margin: 0; font-size: 18px;">SPU Facility Fix • Update</h2>
-            <p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">Technician On Site</p>
+            <h2 style="margin: 0; font-size: 18px;">ระบบแจ้งซ่อม SPU • อัปเดตสถานะ</h2>
+            <p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">ช่างเทคนิคถึงหน้างานแล้ว</p>
           </div>
           <div style="padding: 16px 0; color: #334155; font-size: 13px; line-height: 1.6;">
-            <p>Hello Praew,</p>
-            <p><strong>Tech Somchai K.</strong> has arrived at <strong>Building 11, Floor 5, Room 11-502</strong> to address your report: <em>"Water leaking heavily from cassette AC unit"</em>.</p>
+            <p>เรียน คุณแพรว,</p>
+            <p><strong>ช่างสมชาย การช่าง</strong> ได้เดินทางถึง <strong>อาคาร 11 ชั้น 5 ห้อง 11-502</strong> เพื่อดำเนินการแก้ไขรายการแจ้งซ่อม: <em>"น้ำแอร์หยดลงโต๊ะเรียนแถว 14 อย่างหนัก"</em> เรียบร้อยแล้ว</p>
             <div style="background: #fdf2f8; padding: 12px; border-radius: 8px; border-left: 4px solid #db2777; margin: 12px 0;">
-              <strong>Technician Note:</strong> Working on drainage pipe flush & clearing drip tray.
+              <strong>บันทึกจากช่าง:</strong> กำลังล้างทำความสะอาดท่อน้ำทิ้งและเคลียร์ถาดน้ำทิ้ง
             </div>
             <p style="text-align: center; margin-top: 20px;">
-              <a href="#/track/SPU-8821" style="background: #3b0764; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">View Live Progress Tracker</a>
+              <a href="#/track/SPU-8821" style="background: #3b0764; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">ดูสถานะติดตามงานแบบเรียลไทม์</a>
             </p>
           </div>
         </div>
@@ -149,10 +149,10 @@ export function createTicket(params: CreateTicketParams): Ticket {
   const tickets = getTickets();
   const room = getRoomById(params.roomId) || {
     id: params.roomId,
-    building: 'Building 11',
+    building: 'อาคาร 11',
     floor: 5,
     roomNumber: '11-502',
-    name: 'Room 11-502 (Multimedia Lab)',
+    name: 'ห้อง 11-502 (ห้องแล็บมัลติมีเดีย)',
     qrToken: ''
   };
 
@@ -163,16 +163,16 @@ export function createTicket(params: CreateTicketParams): Ticket {
 
   let urgency = params.urgency || 'NORMAL';
   const categoryLabelMap: Record<EquipmentCategory, string> = {
-    AIR_CONDITIONER: 'Air Conditioner',
-    LIGHTS_ELECTRICAL: 'Lights / Electrical',
-    SANITARY: 'Sanitary / Plumbing',
-    DESK_CHAIR: 'Desk & Chair',
-    PROJECTOR_PC: 'Projector / PC',
-    OTHER_ISSUE: 'Other Issue',
-    PROJECTOR_AV: 'Projector / AV',
-    ELECTRICAL_PLUGS: 'Electrical / Plugs',
-    FURNITURE: 'Desk & Chair',
-    LAB_COMPUTERS: 'Lab Computers'
+    AIR_CONDITIONER: 'เครื่องปรับอากาศ',
+    LIGHTS_ELECTRICAL: 'ระบบไฟฟ้า / หลอดไฟ',
+    SANITARY: 'สุขภัณฑ์ / ประปา',
+    DESK_CHAIR: 'โต๊ะและเก้าอี้เรียน',
+    PROJECTOR_PC: 'โปรเจกเตอร์ / โสตฯ',
+    OTHER_ISSUE: 'ปัญหาอื่นๆ',
+    PROJECTOR_AV: 'โปรเจกเตอร์ / โสตฯ',
+    ELECTRICAL_PLUGS: 'ระบบไฟฟ้า / ปลั๊ก',
+    FURNITURE: 'โต๊ะและเก้าอี้ / ครุภัณฑ์',
+    LAB_COMPUTERS: 'คอมพิวเตอร์ห้องแล็บ'
   };
 
   const newTicket: Ticket = {
@@ -189,26 +189,26 @@ export function createTicket(params: CreateTicketParams): Ticket {
     title: params.description.slice(0, 50) + (params.description.length > 50 ? '...' : ''),
     description: params.description,
     photoUrl: params.photoUrl,
-    studentName: params.studentName || 'Praew Suk.',
+    studentName: params.studentName || 'แพรว สุขสมบูรณ์',
     studentEmail: params.studentEmail,
     status: 'PENDING_REVIEW',
     urgency,
-    urgencyTag: urgency === 'URGENT' ? 'URGENT • SLA < 30m' : 'SLA 24h',
+    urgencyTag: urgency === 'URGENT' ? 'ด่วนมาก • SLA < 30 นาที' : 'SLA 24 ชม.',
     workflowStep: 1,
-    timeAgoText: 'Just now',
+    timeAgoText: 'เมื่อสักครู่',
     createdAt: now,
     updatedAt: now,
     subscribers: [params.studentEmail],
     upvotes: 1,
     commentsCount: 0,
-    equipmentDetails: `${room.building}, Room ${room.roomNumber}`,
+    equipmentDetails: `${room.building}, ห้อง ${room.roomNumber}`,
     events: [
       {
         id: `LOG-${Date.now()}-1`,
         ticketId,
         actorType: 'STUDENT',
-        actorName: params.studentName || 'Praew Suk.',
-        action: 'Submitted issue report',
+        actorName: params.studentName || 'แพรว สุขสมบูรณ์',
+        action: 'ส่งเรื่องแจ้งซ่อมเรียบร้อย',
         newStatus: 'PENDING_REVIEW',
         timestamp: now
       }
@@ -224,15 +224,15 @@ export function createTicket(params: CreateTicketParams): Ticket {
     ticketId,
     ticketToken: accessToken,
     type: 'CONFIRMATION',
-    subject: `[SPU Facility Fix] Ticket Received: #${ticketId} (${room.name})`,
+    subject: `[แจ้งซ่อม SPU] ได้รับเรื่องแจ้งซ่อมแล้ว: #${ticketId} (${room.name})`,
     previewHtml: `
       <div style="font-family: system-ui, sans-serif; max-width: 540px; margin: 0 auto; padding: 20px; border: 1px solid #fbcfe8; border-radius: 16px; background: #ffffff;">
         <div style="background: linear-gradient(135deg, #3b0764, #be185d); color: white; padding: 16px; border-radius: 12px; text-align: center;">
-          <h2 style="margin: 0; font-size: 18px;">Ticket #${ticketId} Logged</h2>
-          <p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">Estimated review: ~30 mins</p>
+          <h2 style="margin: 0; font-size: 18px;">บันทึกรายการคำร้อง #${ticketId} แล้ว</h2>
+          <p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">ระยะเวลาตรวจสอบ: ~30 นาที</p>
         </div>
         <p style="margin-top: 16px; font-size: 13px; color: #334155;">
-          Hello ${params.studentName || 'Praew'}, we have received your report for <strong>${room.name}</strong>. Our facility technician will be dispatched promptly.
+          สวัสดี คุณ${params.studentName || 'แพรว'}, ทางระบบได้รับเรื่องแจ้งซ่อมสำหรับ <strong>${room.name}</strong> เรียบร้อยแล้ว เจ้าหน้าที่ช่างเทคนิคจะเข้าพื้นที่โดยเร็วที่สุด
         </p>
       </div>
     `
@@ -242,7 +242,7 @@ export function createTicket(params: CreateTicketParams): Ticket {
   return newTicket;
 }
 
-export function claimTicket(ticketId: string, technicianName = 'Tech Somchai K.', techId = 'TECH-609'): boolean {
+export function claimTicket(ticketId: string, technicianName = 'ช่างสมชาย การช่าง', techId = 'TECH-609'): boolean {
   const tickets = getTickets();
   const ticketIndex = tickets.findIndex((t) => t.id === ticketId);
   if (ticketIndex === -1) return false;
@@ -253,7 +253,7 @@ export function claimTicket(ticketId: string, technicianName = 'Tech Somchai K.'
   ticket.status = 'IN_PROGRESS';
   ticket.assignedTechId = techId;
   ticket.assignedTechName = technicianName;
-  ticket.techStatusNote = 'Technician assigned and dispatched to room.';
+  ticket.techStatusNote = 'ช่างเทคนิคได้รับมอบหมายงานและกำลังเดินทางไปยังห้องเป้าหมาย';
   ticket.workflowStep = 3;
   ticket.updatedAt = now;
 
@@ -262,7 +262,7 @@ export function claimTicket(ticketId: string, technicianName = 'Tech Somchai K.'
     ticketId,
     actorType: 'TECHNICIAN',
     actorName: technicianName,
-    action: 'Accepted & Dispatched',
+    action: 'รับงาน & เดินทางเข้าพื้นที่',
     oldStatus: ticket.status,
     newStatus: 'IN_PROGRESS',
     timestamp: now
@@ -276,11 +276,11 @@ export function claimTicket(ticketId: string, technicianName = 'Tech Somchai K.'
     ticketId,
     ticketToken: ticket.accessToken,
     type: 'ASSIGNED',
-    subject: `[SPU Tech Dispatched] #${ticketId}: ${technicianName} is en route`,
+    subject: `[ช่าง SPU กำลังเข้าพื้นที่] #${ticketId}: ${technicianName} กำลังเดินทาง`,
     previewHtml: `
       <div style="font-family: system-ui, sans-serif; max-width: 540px; margin: 0 auto; padding: 20px; border: 1px solid #fbcfe8; border-radius: 16px;">
-        <h3 style="color: #3b0764; margin-top: 0;">Technician Dispatched</h3>
-        <p style="color: #334155; font-size: 13px;">${technicianName} has claimed your report for ${ticket.roomName}.</p>
+        <h3 style="color: #3b0764; margin-top: 0;">ช่างเทคนิคกำลังเดินทางเข้าพื้นที่</h3>
+        <p style="color: #334155; font-size: 13px;">${technicianName} ได้รับเรื่องรายการแจ้งซ่อมของคุณที่ ${ticket.roomName} แล้ว</p>
       </div>
     `
   });
@@ -316,7 +316,7 @@ export function updateTicketStatus(params: UpdateStatusParams): boolean {
     ticket.workflowStep = 4;
     ticket.resolutionNote = params.note || ticket.resolutionNote;
     ticket.resolutionProofPhotoUrl = params.proofPhotoUrl || ticket.resolutionProofPhotoUrl;
-    ticket.timeAgoText = 'Just now • Fixed by SPU Facility Team';
+    ticket.timeAgoText = 'เมื่อสักครู่ • ซ่อมเสร็จโดยทีมช่าง SPU';
     if (params.consumedParts) ticket.consumedParts = params.consumedParts;
     if (params.safetyChecklist) ticket.safetyChecklist = params.safetyChecklist;
   }
@@ -325,8 +325,8 @@ export function updateTicketStatus(params: UpdateStatusParams): boolean {
     id: `LOG-${Date.now()}`,
     ticketId: params.ticketId,
     actorType: 'TECHNICIAN',
-    actorName: params.technicianName || 'Tech Somchai K.',
-    action: params.status === 'RESOLVED' ? 'Marked as Resolved & Certified' : `Status updated to ${params.status}`,
+    actorName: params.technicianName || 'ช่างสมชาย การช่าง',
+    action: params.status === 'RESOLVED' ? 'บันทึกว่าซ่อมเสร็จสิ้นและรับรองผล' : `ปรับปรุงสถานะเป็น ${params.status}`,
     oldStatus,
     newStatus: params.status,
     note: params.note,
@@ -344,14 +344,14 @@ export function updateTicketStatus(params: UpdateStatusParams): boolean {
         ticketId: ticket.id,
         ticketToken: ticket.accessToken,
         type: 'RESOLVED',
-        subject: `[SPU Facility Fix] Resolved: ${ticket.title} (#${ticket.id})`,
+        subject: `[แจ้งซ่อม SPU] ซ่อมเสร็จสิ้น: ${ticket.title} (#${ticket.id})`,
         previewHtml: `
           <div style="font-family: system-ui, sans-serif; max-width: 540px; margin: 0 auto; padding: 20px; border: 1px solid #bbf7d0; border-radius: 16px;">
             <div style="background: #15803d; color: white; padding: 14px; border-radius: 12px; text-align: center;">
-              <h3 style="margin: 0;">Issue Resolved & Certified</h3>
+              <h3 style="margin: 0;">การซ่อมแซมเสร็จสมบูรณ์ & รับรองผลแล้ว</h3>
             </div>
             <p style="font-size: 13px; color: #334155; margin-top: 14px;">
-              Repair completed at ${ticket.roomName}. Remarks: ${params.note || 'Tested and verified operational.'}
+              ดำเนินการซ่อมเรียบร้อยแล้วที่ ${ticket.roomName} รายละเอียด: ${params.note || 'ทดสอบระบบและผ่านการตรวจสอบแล้ว'}
             </p>
           </div>
         `

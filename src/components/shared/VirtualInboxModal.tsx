@@ -31,7 +31,7 @@ export const VirtualInboxModal: React.FC<VirtualInboxModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-lg">Virtual Campus Mailbox (จำลองอีเมลมหาวิทยาลัย)</h3>
+                <h3 className="font-bold text-lg">กล่องอีเมลมหาวิทยาลัย (จำลองการแจ้งเตือน)</h3>
                 <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-medium">
                   {emails.length} ฉบับ
                 </span>
@@ -63,6 +63,13 @@ export const VirtualInboxModal: React.FC<VirtualInboxModalProps> = ({
               <div className="divide-y divide-slate-100">
                 {emails.map((email) => {
                   const isSelected = selectedEmail?.id === email.id;
+                  const emailTypeLabels: Record<string, string> = {
+                    CONFIRMATION: 'ยืนยันรับเรื่อง',
+                    ASSIGNED: 'มอบหมายช่าง',
+                    IN_PROGRESS: 'กำลังซ่อม',
+                    RESOLVED: 'ซ่อมเสร็จสิ้น',
+                    SUBSCRIBER_ALERT: 'แจ้งผู้ติดตาม'
+                  };
                   return (
                     <button
                       key={email.id}
@@ -85,7 +92,7 @@ export const VirtualInboxModal: React.FC<VirtualInboxModalProps> = ({
                           #{email.ticketId}
                         </span>
                         <span className="text-[10px] text-brand-600 font-medium">
-                          {email.type}
+                          {emailTypeLabels[email.type] || email.type}
                         </span>
                       </div>
                     </button>
@@ -105,7 +112,7 @@ export const VirtualInboxModal: React.FC<VirtualInboxModalProps> = ({
                     {selectedEmail.subject}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs text-slate-600">
-                    <div><strong className="text-slate-500">ผู้ส่ง:</strong> กองอาคารสถานที่ (no-reply@facility.university.edu)</div>
+                    <div><strong className="text-slate-500">ผู้ส่ง:</strong> กองอาคารสถานที่ (no-reply@facility.spu.ac.th)</div>
                     <div><strong className="text-slate-500">ผู้รับ:</strong> {selectedEmail.to}</div>
                     <div><strong className="text-slate-500">เวลาส่ง:</strong> {new Date(selectedEmail.sentAt).toLocaleString('th-TH')}</div>
                     <div><strong className="text-slate-500">รหัสคำร้อง:</strong> #{selectedEmail.ticketId}</div>
@@ -121,7 +128,7 @@ export const VirtualInboxModal: React.FC<VirtualInboxModalProps> = ({
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition-all"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      เปิดหน้าติดตามสถานะแบบ No-Login ทันที
+                      เปิดหน้าติดตามสถานะทันที (ไม่ต้องล็อกอิน)
                     </button>
                   </div>
                 </div>

@@ -59,28 +59,28 @@ export const UrgencyBadge: React.FC<{ urgency: UrgencyLevel }> = ({ urgency }) =
       return (
         <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-800 border border-red-300">
           <ShieldAlert className="w-3 h-3 text-red-600" />
-          Urgent
+          ด่วนมาก
         </span>
       );
     case 'HIGH':
       return (
         <span className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 border border-orange-200">
           <AlertCircle className="w-3 h-3 text-orange-600" />
-          High
+          ด่วน
         </span>
       );
     case 'MEDIUM':
     case 'NORMAL':
       return (
         <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-          Normal
+          ปกติ
         </span>
       );
     case 'LOW':
     default:
       return (
         <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-          Low
+          ไม่เร่งด่วน
         </span>
       );
   }
@@ -111,22 +111,22 @@ export const CategoryIcon: React.FC<{ category: EquipmentCategory; className?: s
 export const getCategoryLabel = (category: EquipmentCategory): string => {
   switch (category) {
     case 'AIR_CONDITIONER':
-      return 'Air Conditioner';
+      return 'เครื่องปรับอากาศ / แอร์';
     case 'LIGHTS_ELECTRICAL':
     case 'ELECTRICAL_PLUGS':
-      return 'Lights / Electrical';
+      return 'ระบบไฟฟ้า / ปลั๊ก / หลอดไฟ';
     case 'SANITARY':
-      return 'Sanitary / Plumbing';
+      return 'สุขภัณฑ์ / ประปา';
     case 'DESK_CHAIR':
     case 'FURNITURE':
-      return 'Desk & Chair';
+      return 'โต๊ะและเก้าอี้ / ครุภัณฑ์';
     case 'PROJECTOR_PC':
     case 'PROJECTOR_AV':
-      return 'Projector / PC';
+      return 'โปรเจกเตอร์ / โสตทัศนูปกรณ์';
     case 'LAB_COMPUTERS':
-      return 'Lab Computers';
+      return 'คอมพิวเตอร์ห้องแล็บ';
     case 'OTHER_ISSUE':
     default:
-      return 'Other Issue';
+      return 'ปัญหาอื่นๆ';
   }
 };

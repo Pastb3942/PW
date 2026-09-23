@@ -13,8 +13,8 @@ interface MobileHeaderProps {
 }
 
 export const MobileHeader: React.FC<MobileHeaderProps> = ({
-  title = 'SPU Facility Fix',
-  subtitle = 'Home',
+  title = 'ระบบแจ้งซ่อม SPU',
+  subtitle = 'หน้าหลัก',
   unreadCount = 1,
   onOpenMailbox,
   avatarUrl = CURRENT_STUDENT.avatarUrl,
@@ -53,7 +53,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
         <button
           onClick={onOpenMailbox}
           className="relative p-1.5 text-slate-600 hover:text-spu-purple transition-colors"
-          title="Campus Mailbox / Notifications"
+          title="กล่องข้อความ / การแจ้งเตือน"
         >
           <Bell className="w-5 h-5" />
           {unreadCount > 0 && (
@@ -65,7 +65,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
         <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-200 shadow-sm shrink-0">
           <img
             src={avatarUrl}
-            alt="User avatar"
+            alt="รูปโปรไฟล์"
             className="w-full h-full object-cover"
           />
         </div>

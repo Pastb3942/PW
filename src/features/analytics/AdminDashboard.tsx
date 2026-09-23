@@ -103,7 +103,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ tickets, rooms }
             ผู้จัดการอาคารสถานที่และวิศวกรรมบำรุงรักษา
           </div>
           <h1 className="text-xl md:text-2xl font-black text-slate-900">
-            ระบบวิเคราะห์และสรุปผลการซ่อมบำรุง (Facility Analytics)
+            ระบบวิเคราะห์และสรุปผลการซ่อมบำรุง
           </h1>
           <p className="text-xs text-slate-500 mt-1">
             ติดตามความถี่อุปกรณ์ชำรุดซ้ำซาก ระยะเวลาเฉลี่ยในการซ่อม และวางแผนจัดซื้ออะไหล่ทดแทน
@@ -131,7 +131,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ tickets, rooms }
           </div>
           <div className="text-[11px] text-brand-600 font-medium mt-2 flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5" />
-            รองรับ 100% Mobile Flow
+            รองรับการใช้งานผ่านมือถือ 100%
           </div>
         </div>
 
@@ -180,7 +180,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ tickets, rooms }
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
               <h3 className="font-bold text-slate-900 text-sm">
-                สถิติความถี่อุปกรณ์ชำรุด (Equipment Failure Recurrence)
+                สถิติความถี่อุปกรณ์ชำรุด
               </h3>
               <p className="text-[11px] text-slate-400">
                 วิเคราะห์ว่าอุปกรณ์ประเภทใดชำรุดบ่อยที่สุดในมหาวิทยาลัย
@@ -219,7 +219,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ tickets, rooms }
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
               <h3 className="font-bold text-slate-900 text-sm">
-                พื้นที่ที่แจ้งซ่อมบ่อยที่สุด (Campus Hotspots)
+                พื้นที่ที่แจ้งซ่อมบ่อยที่สุด
               </h3>
               <p className="text-[11px] text-slate-400">
                 อาคารและห้องเรียนที่มีอัตราการรายงานปัญหาหนาแน่น

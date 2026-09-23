@@ -43,25 +43,25 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
       <div>
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-black text-slate-900 tracking-tight">
-            My Reports & Tracking
+            รายการแจ้งซ่อมของฉัน & ติดตามสถานะ
           </h1>
           <span className="px-2.5 py-0.5 rounded-full bg-spu-lightPink text-spu-pink text-[11px] font-extrabold border border-spu-borderPink flex items-center gap-1">
             <FileText className="w-3 h-3" />
-            {tickets.length} Total
+            ทั้งหมด {tickets.length} รายการ
           </span>
         </div>
         <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-          Track real-time maintenance status and technician dispatches across Sripatum University.
+          ติดตามสถานะการซ่อมและการเข้าพื้นที่ของช่างแบบเรียลไทม์ทั่วมหาวิทยาลัยศรีปทุม
         </p>
       </div>
 
       {/* Filter Tabs */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
         {[
-          { id: 'ALL', label: `All (${tickets.length})` },
-          { id: 'IN_PROGRESS', label: `In Progress (${tickets.filter((t) => t.status === 'IN_PROGRESS').length})` },
-          { id: 'PENDING', label: `Pending (${tickets.filter((t) => t.status === 'PENDING' || t.status === 'PENDING_REVIEW').length})` },
-          { id: 'RESOLVED', label: `Resolved (${tickets.filter((t) => t.status === 'RESOLVED').length})` }
+          { id: 'ALL', label: `ทั้งหมด (${tickets.length})` },
+          { id: 'IN_PROGRESS', label: `กำลังดำเนินการ (${tickets.filter((t) => t.status === 'IN_PROGRESS').length})` },
+          { id: 'PENDING', label: `รอรับเรื่อง (${tickets.filter((t) => t.status === 'PENDING' || t.status === 'PENDING_REVIEW').length})` },
+          { id: 'RESOLVED', label: `ซ่อมเสร็จสิ้น (${tickets.filter((t) => t.status === 'RESOLVED').length})` }
         ].map((tab) => {
           const isSelected = filter === tab.id;
           return (
@@ -99,7 +99,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                     #{ticket.id}
                   </span>
                   <span className="text-[11px] text-slate-400">
-                    • {ticket.timeAgoText || 'Today'}
+                    • {ticket.timeAgoText || 'วันนี้'}
                   </span>
                 </div>
 
@@ -112,7 +112,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                       : 'bg-slate-100 text-slate-600'
                   }`}
                 >
-                  ● {isInProgress ? 'In Progress' : isResolved ? 'Resolved' : 'Pending Review'}
+                  ● {isInProgress ? 'กำลังดำเนินการ' : isResolved ? 'ซ่อมเสร็จสิ้น' : 'รอตรวจสอบ'}
                 </span>
               </div>
 
@@ -120,7 +120,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
               <div className="flex items-center gap-1 text-xs text-slate-600">
                 <MapPin className="w-3.5 h-3.5 text-spu-pink shrink-0" />
                 <span className="font-semibold truncate">
-                  {ticket.building}, Floor {ticket.floor}, Room {ticket.roomNumber}
+                  {ticket.building}, ชั้น {ticket.floor}, ห้อง {ticket.roomNumber}
                 </span>
               </div>
 
@@ -133,7 +133,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                     className="w-full h-full object-cover"
                   />
                   <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[8px] font-bold text-center py-0.5">
-                    Original
+                    รูปตอนแจ้ง
                   </span>
                 </div>
 
@@ -142,7 +142,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                     {ticket.category === 'AIR_CONDITIONER' && '❄️'}
                     {ticket.category === 'PROJECTOR_PC' && '📽️'}
                     {ticket.category === 'DESK_CHAIR' && '🪑'}
-                    {ticket.categoryLabel || 'Equipment'}
+                    {ticket.categoryLabel || 'อุปกรณ์'}
                   </span>
                   <h4 className="text-xs font-bold text-slate-900 leading-snug line-clamp-2">
                     {ticket.title}
@@ -152,7 +152,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                       <Wrench className="w-3 h-3 text-spu-pink" />
                       {ticket.assignedTechName}
                       <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1 rounded">
-                        on site
+                        ถึงหน้างานแล้ว
                       </span>
                     </p>
                   )}
@@ -162,9 +162,9 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
               {/* 4-Stage Stepper */}
               <div className="pt-1">
                 <div className="flex items-center justify-between text-[11px] text-slate-400 font-bold mb-2">
-                  <span>Workflow Progress</span>
+                  <span>ความคืบหน้าการทำงาน</span>
                   <span className="text-spu-pink">
-                    Step {ticket.workflowStep || 1} of 4
+                    ขั้นตอนที่ {ticket.workflowStep || 1} จาก 4
                   </span>
                 </div>
 
@@ -181,10 +181,10 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
 
                   {/* 4 Nodes */}
                   {[
-                    { step: 1, label: 'Received' },
-                    { step: 2, label: ticket.status === 'PENDING_REVIEW' ? 'Dispatching' : 'Assigned' },
-                    { step: 3, label: ticket.status === 'RESOLVED' ? 'Fixed' : 'Working' },
-                    { step: 4, label: 'Resolved' }
+                    { step: 1, label: 'รับเรื่อง' },
+                    { step: 2, label: ticket.status === 'PENDING_REVIEW' ? 'ส่งเรื่อง' : 'มอบหมายงาน' },
+                    { step: 3, label: ticket.status === 'RESOLVED' ? 'ซ่อมเสร็จ' : 'กำลังซ่อม' },
+                    { step: 4, label: 'ปิดงาน' }
                   ].map((node) => {
                     const isDone = (ticket.workflowStep || 1) > node.step;
                     const isCurrent = (ticket.workflowStep || 1) === node.step;
@@ -227,7 +227,7 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                 <div className="p-2.5 rounded-2xl bg-pink-50/70 border border-pink-100 flex items-start gap-2 text-[11px] text-spu-plum font-medium leading-relaxed">
                   <Info className="w-3.5 h-3.5 text-spu-pink shrink-0 mt-0.5" />
                   <span>
-                    <strong>Technician update:</strong> {ticket.techStatusNote}
+                    <strong>อัปเดตจากช่าง:</strong> {ticket.techStatusNote}
                   </span>
                 </div>
               )}
@@ -241,14 +241,14 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                       className="flex-1 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
                     >
                       <Camera className="w-3.5 h-3.5" />
-                      Photos (2)
+                      ดูรูปถ่าย (2)
                     </button>
                     <button
                       onClick={() => onContactTech && onContactTech(ticket)}
                       className="flex-1 py-2 px-3 bg-[#3B0764] hover:bg-[#4A154B] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
-                      Contact Tech
+                      ติดต่อช่าง
                     </button>
                   </>
                 )}
@@ -256,13 +256,13 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                 {isPending && (
                   <div className="w-full flex items-center justify-between text-xs">
                     <span className="text-slate-400 text-[11px]">
-                      Estimated review: ~30 mins
+                      ระยะเวลาตรวจสอบ: ~30 นาที
                     </span>
                     <button
                       onClick={() => onSelectTicket(ticket.id, ticket.accessToken)}
                       className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold flex items-center gap-1"
                     >
-                      Add Details <ChevronRight className="w-3.5 h-3.5" />
+                      เพิ่มรายละเอียด <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 )}
@@ -274,11 +274,11 @@ export const MyReportsView: React.FC<MyReportsViewProps> = ({
                       className="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold flex items-center gap-1.5"
                     >
                       <Eye className="w-3.5 h-3.5 text-spu-pink" />
-                      View Before / After
+                      ดูภาพเปรียบเทียบ ก่อน/หลัง
                     </button>
 
                     <div className="flex items-center gap-1 text-[11px] font-bold text-slate-600">
-                      <span>Rated</span>
+                      <span>ให้คะแนนแล้ว</span>
                       <div className="flex text-amber-500">
                         {'★'.repeat(5)}
                       </div>

@@ -56,17 +56,17 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
           </div>
           <div>
             <span className="font-extrabold text-xs text-slate-900">
-              UniLoop TECH
+              ช่างเทคนิค SPU
             </span>
             <span className="text-[10px] text-slate-400 block -mt-0.5">
-              Task Queue
+              คิวงานซ่อม
             </span>
           </div>
         </div>
 
         <div className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200 flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          On Duty • Zone North
+          เข้าเวรปฏิบัติหน้าที่ • โซนเหนือ
         </div>
       </div>
 
@@ -85,20 +85,20 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
               {CURRENT_TECH.name}
             </h3>
             <div className="text-[11px] text-slate-500 font-medium">
-              ID: {CURRENT_TECH.id}
+              รหัสช่าง: {CURRENT_TECH.id}
             </div>
             <div className="text-[10px] text-slate-400 truncate max-w-[180px]">
-              Senior AC & Electrical Specialist
+              ผู้เชี่ยวชาญอาวุโส ระบบแอร์และไฟฟ้า
             </div>
           </div>
         </div>
 
         <div className="text-right shrink-0">
           <span className="px-2 py-0.5 rounded-full bg-spu-lightPink text-spu-pink text-[9px] font-black uppercase tracking-wider block">
-            SHIFT ACTIVE
+            กำลังเข้ากะ
           </span>
           <span className="text-[10px] text-slate-400 font-semibold mt-1 block">
-            Zone North (Bld 5, 11)
+            โซนเหนือ (อาคาร 5, 11)
           </span>
         </div>
       </div>
@@ -108,40 +108,40 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
         {/* NEW */}
         <div className="p-3 bg-[#3B0764] text-white rounded-2xl shadow-sm flex flex-col justify-between">
           <span className="text-[9px] uppercase font-extrabold text-pink-200">
-            NEW
+            งานใหม่
           </span>
           <div className="text-xl font-black mt-1">
             {newCount + 2}{' '}
             <span className="text-[10px] font-normal text-pink-200">!</span>
           </div>
           <span className="text-[9px] text-pink-200/80 font-semibold mt-0.5">
-            3 Urgent
+            3 ด่วนมาก
           </span>
         </div>
 
         {/* IN PROGRESS */}
         <div className="p-3 bg-white border border-slate-100 rounded-2xl shadow-sm flex flex-col justify-between">
           <span className="text-[9px] uppercase font-extrabold text-slate-400">
-            IN PROGRESS
+            กำลังทำ
           </span>
           <div className="text-xl font-black text-slate-900 mt-1">
             {inProgressCount}
           </div>
           <span className="text-[9px] text-slate-500 font-semibold mt-0.5">
-            1 On Track
+            1 อยู่ในเกณฑ์
           </span>
         </div>
 
         {/* COMPLETED */}
         <div className="p-3 bg-white border border-slate-100 rounded-2xl shadow-sm flex flex-col justify-between">
           <span className="text-[9px] uppercase font-extrabold text-slate-400">
-            COMPLETED
+            เสร็จสิ้น
           </span>
           <div className="text-xl font-black text-emerald-600 mt-1">
             {completedCount + 7}
           </div>
           <span className="text-[9px] text-emerald-600 font-semibold mt-0.5">
-            +100% SLA
+            +100% ตาม SLA
           </span>
         </div>
       </div>
@@ -153,10 +153,10 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
         </div>
         <div>
           <div className="font-extrabold text-xs text-rose-900">
-            Critical Alert: Immediate Dispatch
+            แจ้งเตือนด่วนมาก: ต้องเข้าพื้นที่ทันที
           </div>
           <div className="text-[11px] text-rose-800 leading-snug mt-0.5">
-            2 urgent tickets pending immediate dispatch in Building 11 (Floor 5) & Building 5.
+            มีงานด่วน 2 รายการรอเข้าตรวจสอบทันที ที่อาคาร 11 (ชั้น 5) และอาคาร 5
           </div>
         </div>
       </div>
@@ -165,7 +165,7 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
       <div className="relative">
         <input
           type="text"
-          placeholder="Search ticket #, room, or equipment..."
+          placeholder="ค้นหารหัสคำร้อง, ห้อง หรืออุปกรณ์..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-9 pr-10 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-spu-pink/20 focus:border-spu-pink shadow-sm"
@@ -179,10 +179,10 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
       {/* Filter Pills */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
         {[
-          { id: 'ALL', label: 'All Urgency' },
-          { id: 'B11', label: 'Bld 11 (2)' },
-          { id: 'B5', label: 'Bld 5 (1)' },
-          { id: 'LIB', label: 'Central Lib' }
+          { id: 'ALL', label: 'ทุกระดับความเร่งด่วน' },
+          { id: 'B11', label: 'อาคาร 11 (2)' },
+          { id: 'B5', label: 'อาคาร 5 (1)' },
+          { id: 'LIB', label: 'หอสมุดกลาง' }
         ].map((f) => {
           const isSelected = filterBldg === f.id;
           return (
@@ -204,13 +204,13 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
       {/* Assigned Queue Title */}
       <div className="flex items-center justify-between text-xs pt-1">
         <h3 className="font-extrabold text-slate-900 flex items-center gap-1.5">
-          Assigned Queue
+          รายการงานที่ได้รับมอบหมาย
           <span className="text-[11px] font-semibold text-slate-400">
-            ({tickets.length} active)
+            (กำลังดำเนินการ {tickets.length} งาน)
           </span>
         </h3>
         <span className="text-[11px] font-bold text-spu-pink">
-          Sort: Severity ⇅
+          เรียงตาม: ความเร่งด่วน ⇅
         </span>
       </div>
 
@@ -222,19 +222,19 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="font-extrabold text-xs text-slate-900">#SPU-8821</span>
               <span className="px-2 py-0.2 rounded-full bg-rose-100 text-rose-700 text-[10px] font-extrabold">
-                ● URGENT • SLA &lt; 30m
+                ● ด่วนมาก • SLA &lt; 30 นาที
               </span>
             </div>
-            <span>18m ago</span>
+            <span>18 นาทีที่แล้ว</span>
           </div>
 
           <div>
             <div className="text-xs font-bold text-slate-900 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-              Bld 11, Floor 5, Room 11-502
+              อาคาร 11 ชั้น 5 ห้อง 11-502
             </div>
             <div className="text-[11px] text-slate-500 font-medium pl-4 mt-0.5">
-              Air Conditioner (Cassette 02) • Multimedia Design Lab
+              เครื่องปรับอากาศ (แบบฝังฝ้า 02) • ห้องแล็บออกแบบมัลติมีเดีย
             </div>
           </div>
 
@@ -246,16 +246,16 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
                 className="w-full h-full object-cover"
               />
               <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[8px] font-bold text-center py-0.2">
-                3 Photos
+                3 รูปถ่าย
               </span>
             </div>
 
             <div className="min-w-0">
               <p className="text-xs text-slate-700 line-clamp-2 leading-relaxed">
-                Water leaking heavily from ceiling cassette unit onto desk 14. Loud humming vibration...
+                น้ำแอร์หยดลงโต๊ะเรียนแถว 14 อย่างหนัก มีเสียงสั่นดังผิดปกติ...
               </p>
               <div className="text-[10px] text-slate-400 mt-1">
-                👤 Praew S. (Student Rep)
+                👤 แพรว ส. (ตัวแทนนักศึกษา)
               </div>
             </div>
           </div>
@@ -267,7 +267,7 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
               className="flex-1 py-2.5 px-4 bg-[#3B0764] hover:bg-[#4A154B] text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-sm transition-all"
             >
               <Check className="w-4 h-4 text-emerald-400" />
-              Accept & Dispatch
+              รับงาน & เข้าพื้นที่
             </button>
             <button className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
               <Phone className="w-4 h-4" />
@@ -284,26 +284,26 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-xs text-slate-900">#SPU-8824</span>
               <span className="px-2 py-0.2 rounded-full bg-rose-100 text-rose-700 text-[10px] font-extrabold">
-                ● URGENT • SLIP HAZARD
+                ● ด่วนมาก • ระวังพื้นลื่นล้ม
               </span>
             </div>
-            <span>27m ago</span>
+            <span>27 นาทีที่แล้ว</span>
           </div>
 
           <div>
             <div className="text-xs font-bold text-slate-900 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-              Bld 5, Floor 1, Main Restroom
+              อาคาร 5 ชั้น 1 ห้องน้ำหลัก
             </div>
             <div className="text-[11px] text-slate-500 font-medium pl-4 mt-0.5">
-              Sanitary / Plumbing • Near Lecture Hall 5-101
+              สุขภัณฑ์ / ประปา • ใกล้ห้องบรรยาย 5-101
             </div>
           </div>
 
           <div className="p-2.5 bg-rose-50/50 rounded-2xl border border-rose-100 text-xs text-rose-900 leading-relaxed">
-            ⚠️ Main shutoff valve overflow onto hallway tile. Extreme slip hazard during class change.
+            ⚠️ วาล์วน้ำหลักรั่ว เอ่อล้นสู่ทางเดิน เสี่ยงลื่นล้มอันตรายช่วงเปลี่ยนคาบเรียน
             <div className="text-[10px] text-slate-400 mt-1">
-              👤 Reported by Security Officer Kittipong
+              👤 แจ้งโดย รปภ. กิตติพงษ์
             </div>
           </div>
 
@@ -313,7 +313,7 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
               className="flex-1 py-2.5 px-4 bg-[#3B0764] hover:bg-[#4A154B] text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-sm transition-all"
             >
               <Wrench className="w-4 h-4" />
-              Accept Job
+              รับงานนี้
             </button>
             <button className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors">
               <Navigation className="w-4 h-4" />
@@ -325,32 +325,32 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
         <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-sm space-y-2.5">
           <div className="flex items-center justify-between text-[11px] text-slate-400">
             <span className="font-extrabold text-xs text-slate-900">#SPU-8815</span>
-            <span>Started 45m ago</span>
+            <span>เริ่มเมื่อ 45 นาทีที่แล้ว</span>
           </div>
 
           <div className="px-2.5 py-1 rounded-full bg-spu-lightPink text-spu-pink text-[10px] font-extrabold w-max border border-spu-borderPink">
-            ● IN PROGRESS • ASSIGNED TO YOU
+            ● กำลังดำเนินการ • มอบหมายให้คุณ
           </div>
 
           <div>
             <div className="text-xs font-bold text-slate-900 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-spu-pink shrink-0" />
-              Central Library, 2nd Floor, Zone B
+              หอสมุดกลาง ชั้น 2 โซน B
             </div>
             <div className="text-[11px] text-slate-500 font-medium pl-4 mt-0.5">
-              Lighting / Electrical • Study Cubicles 12-18
+              ระบบไฟฟ้า / แสงสว่าง • โต๊ะอ่านหนังสือ 12-18
             </div>
           </div>
 
           <div className="p-2.5 bg-slate-50 rounded-2xl text-[11px] text-slate-600 leading-relaxed border border-slate-100">
-            <strong>Parts collected from Depot A:</strong> LED Driver 40W replaced, ballast testing in progress.
+            <strong>เบิกอะไหล่จากคลัง A:</strong> เปลี่ยน LED Driver 40W แล้ว อยู่ระหว่างทดสอบบัลลาสต์
           </div>
 
           <button
             onClick={() => onOpenResolution(tickets.find(t => t.id === 'SPU-8815') || tickets[0])}
             className="w-full py-2.5 px-4 bg-[#3B0764] hover:bg-[#4A154B] text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-sm transition-all"
           >
-            Continue Job →
+            ทำงานต่อ →
           </button>
         </div>
 
@@ -360,34 +360,34 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-xs text-slate-900">#SPU-8794</span>
               <span className="px-2 py-0.2 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold">
-                Normal • SLA 24h
+                ปกติ • SLA 24 ชม.
               </span>
             </div>
-            <span>1h ago</span>
+            <span>1 ชม. ที่แล้ว</span>
           </div>
 
           <div>
             <div className="text-xs font-bold text-slate-900 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-              Bld 5, Floor 3, Room 5-301
+              อาคาร 5 ชั้น 3 ห้อง 5-301
             </div>
             <div className="text-[11px] text-slate-500 font-medium pl-4 mt-0.5">
-              Projector / Classroom PC
+              โปรเจกเตอร์ / คอมพิวเตอร์ห้องเรียน
             </div>
           </div>
 
           <p className="text-xs text-slate-600 leading-relaxed">
-            HDMI ceiling feed flickering violet & blinking orange lamp code when plugged into instructor desk.
+            สายสัญญาณ HDMI บนเพดานภาพกระพริบสีม่วง ไฟส้มเตือนหลอดภาพกระพริบเมื่อเสียบโต๊ะอาจารย์
           </p>
           <div className="text-[10px] text-slate-400">
-            Reported by Dr. Anan (Faculty of Communication Arts)
+            แจ้งโดย ดร.อนันต์ (คณะนิเทศศาสตร์)
           </div>
 
           <button
             onClick={() => handleClaim('SPU-8794')}
             className="w-full py-2 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
           >
-            Claim Ticket
+            กดรับเรื่อง
           </button>
         </div>
       </div>
@@ -395,22 +395,22 @@ export const TechnicianQueueView: React.FC<TechnicianQueueViewProps> = ({
       {/* Floating Status Broadcast */}
       <div className="p-3 bg-slate-100 rounded-2xl flex items-center justify-center gap-2 text-xs text-slate-600 font-bold border border-slate-200">
         <Radio className="w-4 h-4 text-spu-pink animate-pulse" />
-        Broadcast Technician Status: North Quad
+        กระจายสัญญาณสถานะช่าง: ประจำโซนอาคารทิศเหนือ
       </div>
 
       {/* Bottom Sub-Nav for Technician */}
       <div className="flex items-center justify-around pt-2 border-t border-slate-100 text-xs text-slate-400 font-bold">
         <span className="text-spu-pink flex flex-col items-center gap-1">
           <Layers className="w-4 h-4" />
-          Task Queue
+          คิวงานซ่อม
         </span>
         <span className="flex flex-col items-center gap-1 hover:text-slate-700 cursor-pointer">
           <Map className="w-4 h-4" />
-          Map / Zones
+          แผนที่ / โซน
         </span>
         <span className="flex flex-col items-center gap-1 hover:text-slate-700 cursor-pointer">
           <HistoryIcon className="w-4 h-4" />
-          History
+          ประวัติงาน
         </span>
       </div>
     </div>

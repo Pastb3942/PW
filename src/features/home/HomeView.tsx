@@ -47,17 +47,17 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-xl font-black text-slate-900 flex items-center gap-1.5">
-            Hello, Praew! <span>🖐️</span>
+            สวัสดี แพรว! <span>🖐️</span>
           </h1>
           <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-            <span className="text-spu-pink">📍</span> Sripatum University • Bangkhen
+            <span className="text-spu-pink">📍</span> มหาวิทยาลัยศรีปทุม • บางเขน
           </p>
         </div>
 
         {/* 2 Active Badge */}
         <div className="px-3 py-1 rounded-full bg-spu-lightPink text-spu-pink text-xs font-bold flex items-center gap-1.5 border border-spu-borderPink">
           <span className="w-2 h-2 rounded-full bg-spu-pink"></span>
-          {activeReportsCount} Active
+          กำลังซ่อม {activeReportsCount} รายการ
         </div>
       </div>
 
@@ -79,15 +79,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-spu-plum bg-white/80 px-2 py-0.5 rounded-md">
-                  CAMPUS ALERT
+                  ประกาศแจ้งเตือน
                 </span>
-                <span className="text-[10px] text-slate-400 font-semibold">Oct 28</span>
+                <span className="text-[10px] text-slate-400 font-semibold">28 ต.ค.</span>
               </div>
               <h4 className="text-xs font-bold text-slate-900">
-                AC Maintenance: Bldg 11 (Fl. 4-8)
+                บำรุงรักษาระบบแอร์: อาคาร 11 (ชั้น 4-8)
               </h4>
               <p className="text-[11px] text-slate-600 mt-0.5 leading-snug line-clamp-2">
-                Scheduled overhaul this Saturday. Please report pre-existing cooling leaks ahead of time.
+                มีกำหนดการตรวจเช็กระบบใหญ่ในวันเสาร์นี้ หากพบแอร์น้ำหยดหรือไม่เย็น แจ้งล่วงหน้าได้ทันที
               </p>
             </div>
           </div>
@@ -110,10 +110,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         <h2 className="text-base font-extrabold text-white tracking-tight">
-          Quick Report via Room QR
+          แจ้งซ่อมด่วนผ่าน QR Code ประจำห้อง
         </h2>
         <p className="text-[11px] text-purple-200/90 mt-1 max-w-xs mx-auto leading-relaxed">
-          Scan barcode stickers on lecture desks, projectors, or entrance doors to auto-fill location.
+          สแกนสติกเกอร์ QR Code บนโต๊ะเรียน โปรเจกเตอร์ หรือประตูห้อง เพื่อระบุตำแหน่งอัตโนมัติ
         </p>
 
         <button
@@ -121,7 +121,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           className="mt-4 w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-[#DB2777] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-glow-pink active:scale-[0.98] transition-all"
         >
           <Camera className="w-4 h-4" />
-          Open QR Scanner
+          เปิดกล้องสแกน QR Code
         </button>
       </div>
 
@@ -129,7 +129,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="relative">
         <input
           type="text"
-          placeholder="Search building, floor, or room..."
+          placeholder="ค้นหาอาคาร, ชั้น หรือห้องเรียน..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-9 pr-10 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-spu-pink/20 focus:border-spu-pink shadow-sm"
@@ -143,9 +143,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* Quick Filter Chips */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
         <span className="text-[11px] font-extrabold text-slate-400 tracking-wider mr-1">
-          QUICK:
+          ทางลัด:
         </span>
-        {['Bldg 11', 'Bldg 5', 'Central Library', 'Cafeteria'].map((bldg) => {
+        {['อาคาร 11', 'อาคาร 5', 'หอสมุดกลาง', 'โรงอาหาร'].map((bldg) => {
           const isSelected = selectedQuickBldg === bldg;
           return (
             <button
@@ -167,22 +167,22 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold text-xs text-slate-900">
-            Issue Categories
+            หมวดหมู่ปัญหา
           </h3>
           <button
             onClick={() => onStartReport()}
             className="text-[11px] font-bold text-spu-pink hover:underline"
           >
-            Browse all
+            ดูทั้งหมด
           </button>
         </div>
 
         <div className="grid grid-cols-4 gap-2.5">
           {[
-            { id: 'AIR_CONDITIONER', label: 'Air Cond.', icon: AirVent },
-            { id: 'LIGHTS_ELECTRICAL', label: 'Electrical', icon: Lightbulb },
-            { id: 'SANITARY', label: 'Sanitary', icon: Wrench },
-            { id: 'PROJECTOR_PC', label: 'Class AV', icon: Video }
+            { id: 'AIR_CONDITIONER', label: 'เครื่องปรับอากาศ', icon: AirVent },
+            { id: 'LIGHTS_ELECTRICAL', label: 'ระบบไฟฟ้า', icon: Lightbulb },
+            { id: 'SANITARY', label: 'สุขภัณฑ์', icon: Wrench },
+            { id: 'PROJECTOR_PC', label: 'โสตทัศน์', icon: Video }
           ].map((cat) => {
             const Icon = cat.icon;
             return (
@@ -207,13 +207,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold text-xs text-slate-900 flex items-center gap-1">
-            Recent Campus Reports <span className="text-spu-pink">•</span>
+            รายการแจ้งซ่อมล่าสุดในมหาวิทยาลัย <span className="text-spu-pink">•</span>
           </h3>
           <button
             onClick={onViewAllReports}
             className="text-[11px] font-bold text-spu-pink flex items-center hover:underline"
           >
-            See All ({tickets.length}) <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
+            ดูทั้งหมด ({tickets.length}) <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
           </button>
         </div>
 
@@ -246,7 +246,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
                         <Building2 className="w-3 h-3 text-slate-400 shrink-0" />
                         <span className="truncate">
-                          {ticket.building}, Room {ticket.roomNumber}
+                          {ticket.building}, ห้อง {ticket.roomNumber}
                         </span>
                       </p>
                     </div>
@@ -262,7 +262,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         : 'bg-slate-100 text-slate-600'
                     }`}
                   >
-                    ● {isInProgress ? 'In Progress' : isResolved ? 'Resolved' : 'Pending'}
+                    ● {isInProgress ? 'กำลังดำเนินการ' : isResolved ? 'ซ่อมเสร็จสิ้น' : 'รอรับเรื่อง'}
                   </span>
                 </div>
 
@@ -270,7 +270,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-50">
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {ticket.timeAgoText || 'Today'}
+                    {ticket.timeAgoText || 'วันนี้'}
                   </span>
 
                   <div className="flex items-center gap-3">

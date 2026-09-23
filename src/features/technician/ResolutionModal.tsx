@@ -94,7 +94,7 @@ export const ResolutionModal: React.FC<ResolutionModalProps> = ({
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base">บันทึกผลการซ่อมแซมและปิดงาน (Resolution Proof)</h3>
+              <h3 className="font-bold text-base">บันทึกผลการซ่อมแซมและปิดงาน</h3>
               <p className="text-xs text-emerald-100">
                 รหัสคำร้อง: #{ticket.id} • {ticket.roomName}
               </p>
@@ -209,7 +209,7 @@ export const ResolutionModal: React.FC<ResolutionModalProps> = ({
               className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md transition-all disabled:opacity-50"
             >
               <CheckCircle2 className="w-4 h-4" />
-              {submitting ? 'กำลังบันทึก...' : 'ยืนยันปิดงานซ่อม (Resolve)'}
+              {submitting ? 'กำลังบันทึก...' : 'ยืนยันปิดงานซ่อม'}
             </button>
           </div>
         </form>

@@ -63,7 +63,7 @@ export const TicketTimeline: React.FC<TicketTimelineProps> = ({ ticket }) => {
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-brand-600" />
-          ลำดับขั้นตอนความคืบหน้า (Progress Timeline)
+          ลำดับขั้นตอนความคืบหน้า
         </h3>
         <span className="text-xs text-slate-400">
           อัปเดตล่าสุด: {new Date(ticket.updatedAt).toLocaleTimeString('th-TH')} น.

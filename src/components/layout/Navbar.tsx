@@ -39,9 +39,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
           <div>
             <span className="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight flex items-center gap-1.5">
-              Facility Fix
+              แจ้งซ่อม SPU
               <span className="text-[10px] uppercase font-black px-1.5 py-0.5 rounded bg-brand-100 text-brand-700">
-                Campus
+                มหาวิทยาลัย
               </span>
             </span>
             <span className="text-[10px] text-slate-400 block -mt-1 font-medium">
@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'hover:bg-slate-100 hover:text-slate-900'
             }`}
           >
-            แจ้งซ่อม (No-Login)
+            แจ้งซ่อมด่วน (ไม่ต้องล็อกอิน)
           </button>
           <button
             onClick={() => onNavigate('tech')}

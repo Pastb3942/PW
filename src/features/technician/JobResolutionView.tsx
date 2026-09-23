@@ -36,25 +36,25 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
     id: 'SPU-8821',
     refNumber: 'TK-1083',
     roomId: 'ROOM-SPU-11-502',
-    roomName: 'Building 11, Fl. 5, Room 11-502',
-    building: 'Building 11',
+    roomName: 'อาคาร 11 ชั้น 5 ห้อง 11-502',
+    building: 'อาคาร 11',
     floor: 5,
     roomNumber: '11-502',
     category: 'AIR_CONDITIONER' as const,
-    categoryLabel: 'Air Conditioner',
-    title: 'Water leaking heavily from cassette AC unit over lecture desk 14',
+    categoryLabel: 'เครื่องปรับอากาศ',
+    title: 'น้ำแอร์หยดลงโต๊ะเรียนแถว 14 อย่างหนัก',
     description:
-      'Water leaking heavily from AC vent onto computer desk 14. Loud humming vibration sound since 9:00 AM lecture started.',
+      'น้ำแอร์หยดลงโต๊ะคอมพิวเตอร์แถว 14 มีเสียงสั่นดังผิดปกติตั้งแต่เริ่มเรียนช่วง 09:00 น.',
     photoUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80',
-    studentName: 'Praew Suk.',
+    studentName: 'แพรว สุขสมบูรณ์',
     studentEmail: 'praew.suk@spu.ac.th',
     status: 'IN_PROGRESS' as const,
     urgency: 'URGENT' as const,
-    urgencyTag: 'Urgent • Water Leakage',
-    equipmentDetails: 'Daikin Cassette 36,000 BTU (Unit AC-01)',
+    urgencyTag: 'ด่วนมาก • น้ำรั่วซึม',
+    equipmentDetails: 'Daikin Cassette 36,000 BTU (เครื่อง AC-01)',
     consumedParts: [
-      { name: '1x Drain Pipe Flush Kit', qty: 1 },
-      { name: '4x Rubber Damper Bushings', qty: 4 }
+      { name: 'ชุดอุปกรณ์แยงท่อน้ำทิ้ง 1 ชุด', qty: 1 },
+      { name: 'ลูกยางกันสะเทือน 4 ตัว', qty: 4 }
     ],
     safetyChecklist: {
       electricalSafe: true,
@@ -72,11 +72,11 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
 
   const [activeStep, setActiveStep] = useState<number>(2); // 1: In Progress, 2: In Progress (On-site), 3: Resolved
   const [remarks, setRemarks] = useState(
-    'Cleared clogged condensation drainage line and flushed drip tray. Replaced worn vibration damper rubber mount on fan motor. Unit tested running at 24°C for 20 minutes'
+    'ล้างทำความสะอาดท่อน้ำทิ้งที่อุดตันและถาดน้ำทิ้ง เปลี่ยนลูกยางกันสะเทือนมอเตอร์พัดลมที่เสื่อมสภาพ ทดสอบเปิดใช้งานที่อุณหภูมิ 24°C ต่อเนื่อง 20 นาที ทำงานได้ปกติ'
   );
   const [parts, setParts] = useState([
-    '1x Drain Pipe Flush Kit',
-    '4x Rubber Damper Bushings'
+    'ชุดอุปกรณ์แยงท่อน้ำทิ้ง 1 ชุด',
+    'ลูกยางกันสะเทือน 4 ตัว'
   ]);
   const [newPartName, setNewPartName] = useState('');
   const [isAddingPart, setIsAddingPart] = useState(false);
@@ -135,10 +135,10 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
           onClick={onBack}
           className="text-xs font-bold text-slate-700 hover:text-spu-plum flex items-center gap-1"
         >
-          ← Back to Queue
+          ← กลับไปยังคิวงานช่าง
         </button>
         <span className="text-xs font-extrabold text-slate-900">
-          Job Update & Resolution
+          บันทึกผลการซ่อมและปิดงาน
         </span>
         <div className="w-7 h-7 rounded-full overflow-hidden border border-slate-200">
           <img
@@ -153,21 +153,21 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
       <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-sm space-y-3">
         <div className="flex items-center justify-between text-xs">
           <span className="font-extrabold text-slate-900">
-            {currentTicket.refNumber || 'TK-1083'} Ref: {currentTicket.id}
+            {currentTicket.refNumber || 'TK-1083'} รหัส: {currentTicket.id}
           </span>
           <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 text-[10px] font-extrabold border border-rose-200">
-            ● Urgent • Water Leakage
+            ● ด่วนมาก • น้ำรั่วซึม
           </span>
         </div>
 
         <div className="flex items-center justify-between text-[11px] text-slate-500 border-b border-slate-50 pb-2">
           <span className="flex items-center gap-1 font-semibold text-rose-600">
             <Clock className="w-3.5 h-3.5" />
-            Elapsed: 53m 53s
+            เวลาที่ใช้ไป: 53 นาที 53 วินาที
           </span>
           <span className="text-emerald-600 font-bold flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Field Tech Online
+            ช่างกำลังปฏิบัติงาน
           </span>
         </div>
 
@@ -178,13 +178,13 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
           </div>
           <div>
             <span className="text-[10px] font-extrabold uppercase tracking-wider text-spu-pink">
-              MULTIMEDIA LAB
+              ห้องแล็บมัลติมีเดีย
             </span>
             <div className="font-extrabold text-xs text-slate-900">
-              Building 11, Fl. 5, Room 11-502
+              อาคาร 11 ชั้น 5 ห้อง 11-502
             </div>
             <div className="text-[11px] text-slate-500">
-              {currentTicket.equipmentDetails || 'Daikin Cassette 36,000 BTU (Unit AC-01)'}
+              {currentTicket.equipmentDetails || 'Daikin Cassette 36,000 BTU (เครื่อง AC-01)'}
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
         <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 space-y-2 text-xs">
           <div className="flex items-center justify-between">
             <span className="font-bold text-slate-800">
-              👤 {currentTicket.studentName || 'Praew Suk.'}
+              👤 {currentTicket.studentName || 'แพรว สุขสมบูรณ์'}
             </span>
             <span className="text-[11px] text-spu-pink font-semibold">
               {currentTicket.studentEmail}
@@ -208,13 +208,13 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
             <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-900 shrink-0 border border-slate-200">
               <img
                 src={currentTicket.photoUrl}
-                alt="Initial leak"
+                alt="จุดชำรุดเริ่มต้น"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="text-[10px] text-slate-500">
-              <span className="font-bold text-slate-700 block">Original Leaking Unit</span>
-              Desk 14 damage threat • Reported 09:12 AM
+              <span className="font-bold text-slate-700 block">จุดชำรุดเริ่มต้น</span>
+              กระทบโต๊ะเรียนที่ 14 • แจ้งเมื่อ 09:12 น.
             </div>
           </div>
         </div>
@@ -224,10 +224,10 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
       <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-sm space-y-3">
         <div className="flex items-center justify-between text-xs">
           <h3 className="font-black text-slate-900">
-            Ticket Status Progression
+            ขั้นตอนสถานะงานซ่อม
           </h3>
           <span className="text-[11px] font-bold text-spu-pink">
-            Step 2 of 3
+            ขั้นตอนที่ 2 จาก 3
           </span>
         </div>
 
@@ -240,8 +240,8 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
                 : 'bg-slate-50 border-slate-100 text-slate-600'
             }`}
           >
-            <div className="font-bold text-xs">In Progress</div>
-            <div className="text-[9px] text-purple-200 mt-0.5">On-site Tech</div>
+            <div className="font-bold text-xs">กำลังซ่อม</div>
+            <div className="text-[9px] text-purple-200 mt-0.5">ช่างถึงหน้างาน</div>
           </button>
 
           <button
@@ -252,8 +252,8 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
                 : 'bg-slate-50 border-slate-100 text-slate-600'
             }`}
           >
-            <div className="font-bold text-xs">Waiting Parts</div>
-            <div className="text-[9px] text-slate-400 mt-0.5">Stock check</div>
+            <div className="font-bold text-xs">รอเบิกอะไหล่</div>
+            <div className="text-[9px] text-slate-400 mt-0.5">เช็กสต็อก</div>
           </button>
 
           <button
@@ -264,8 +264,8 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
                 : 'bg-slate-50 border-slate-100 text-slate-600'
             }`}
           >
-            <div className="font-bold text-xs">Resolved</div>
-            <div className="text-[9px] text-slate-400 mt-0.5">Ready to close</div>
+            <div className="font-bold text-xs">ซ่อมเสร็จสิ้น</div>
+            <div className="text-[9px] text-slate-400 mt-0.5">พร้อมปิดงาน</div>
           </button>
         </div>
       </div>
@@ -275,14 +275,14 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-black text-xs text-slate-900">
-              Field Repair Evidence
+              หลักฐานภาพถ่ายการซ่อมเสร็จสิ้น
             </h3>
             <p className="text-[11px] text-slate-400">
-              Provide certified verification photos
+              แนบรูปถ่ายยืนยันการแก้ไขเรียบร้อย
             </p>
           </div>
           <span className="px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 text-[10px] font-bold border border-rose-200">
-            Before / After
+            ก่อน / หลังซ่อม
           </span>
         </div>
 
@@ -290,30 +290,30 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
         <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-video border border-slate-200 shadow-inner">
           <img
             src={AC_REPAIR_PROOF_PHOTO}
-            alt="Post repair inspection"
+            alt="ตรวจสอบหลังการซ่อม"
             className="w-full h-full object-cover"
           />
 
           {/* Top-left overlay pill */}
           <div className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-slate-900/80 backdrop-blur-sm text-emerald-400 text-[10px] font-bold flex items-center gap-1 border border-emerald-500/30">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            POST-REPAIR INSPECTION
+            ตรวจสอบหลังการซ่อม
           </div>
 
           {/* Bottom-right verified status */}
           <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded-full bg-spu-purple/90 backdrop-blur-sm text-white text-[10px] font-extrabold flex items-center gap-1 shadow">
             <Check className="w-3 h-3 text-pink-300" />
-            Dry & Operational
+            แห้งสนิทและใช้งานได้ปกติ
           </div>
         </div>
 
         <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
           <div>
             <span className="font-bold text-slate-700 block">
-              after_repair_compressor_fixed.jpg
+              รูปถ่ายตรวจสอบความเรียบร้อย
             </span>
             <span className="text-[10px] text-slate-400">
-              Verified by Somchai K. (ID: TECH-609)
+              ตรวจสอบโดย สมชาย ก. (รหัสช่าง: TECH-609)
             </span>
           </div>
           <button className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600">
@@ -323,7 +323,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
 
         <button className="w-full py-2.5 px-4 rounded-2xl bg-pink-50 hover:bg-pink-100 text-spu-pink text-xs font-bold flex items-center justify-center gap-1.5 transition-colors border border-pink-200">
           <Camera className="w-4 h-4" />
-          Take Additional Angle / Proof
+          ถ่ายภาพมุมอื่นเพิ่มเติม / หลักฐาน
         </button>
       </div>
 
@@ -331,10 +331,10 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
       <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-black text-xs text-slate-900">
-            Technician Remarks & Action
+            บันทึกการทำงานและวิธีแก้ไขของช่าง
           </h3>
           <span className="text-[10px] font-bold text-rose-500">
-            Required
+            จำเป็น
           </span>
         </div>
 
@@ -348,7 +348,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
         {/* Inventory & Spares Consumed */}
         <div className="space-y-2 pt-1">
           <span className="text-[11px] font-bold text-slate-600 block">
-            Inventory & Spares Consumed
+            รายการอะไหล่และอุปกรณ์ที่ใช้ไป
           </span>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -372,7 +372,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
               <div className="flex items-center gap-1">
                 <input
                   type="text"
-                  placeholder="e.g. 1x Drain Tube"
+                  placeholder="เช่น ท่อน้ำทิ้ง 1 เส้น"
                   value={newPartName}
                   onChange={(e) => setNewPartName(e.target.value)}
                   className="px-2 py-1 text-xs border rounded-lg"
@@ -383,7 +383,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
                   onClick={handleAddPart}
                   className="px-2 py-1 bg-spu-plum text-white rounded-lg text-xs"
                 >
-                  Add
+                  เพิ่ม
                 </button>
               </div>
             ) : (
@@ -392,13 +392,13 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
                 onClick={() => setIsAddingPart(true)}
                 className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold flex items-center gap-1"
               >
-                + Add Part
+                + เพิ่มรายการอะไหล่
               </button>
             )}
           </div>
 
           <p className="text-[10px] text-slate-400">
-            Deducted automatically from Sripatum Campus Central Depot.
+            ระบบจะตัดสต็อกอุปกรณ์อัตโนมัติจากคลังกลาง มหาวิทยาลัยศรีปทุม
           </p>
         </div>
       </div>
@@ -406,13 +406,13 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
       {/* Safety & Handover Protocol Checklist */}
       <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-sm space-y-2.5">
         <h3 className="font-black text-xs text-slate-900 mb-1">
-          Safety & Handover Protocol
+          ขั้นตอนความปลอดภัยและการส่งมอบงาน
         </h3>
 
         {[
-          { key: 'electricalSafe', label: 'Electrical wiring safety check completed' },
-          { key: 'areaCleaned', label: 'Desk 14 workstation dried and sanitised' },
-          { key: 'testPassed', label: 'Thermostat test run passed (24°C / 20 min)' }
+          { key: 'electricalSafe', label: 'ตรวจสอบความปลอดภัยของระบบสายไฟเรียบร้อย' },
+          { key: 'areaCleaned', label: 'เช็ดทำความสะอาดและทำให้โต๊ะเรียนแถว 14 แห้งเรียบร้อย' },
+          { key: 'testPassed', label: 'ทดสอบการทำงานของเครื่องปรับอากาศผ่านเกณฑ์ (24°C / 20 นาที)' }
         ].map((item) => {
           const checked = (checklist as any)[item.key];
           return (
@@ -445,11 +445,11 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
           className="w-full py-3.5 px-5 bg-gradient-to-r from-[#4A154B] via-[#3B0764] to-[#BE185D] hover:from-[#3B0764] hover:to-[#9D174D] text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-spu active:scale-[0.98] transition-all disabled:opacity-50"
         >
           <Mail className="w-4 h-4" />
-          {submitting ? 'Notifying student...' : 'Mark as Resolved & Send Email Alert'}
+          {submitting ? 'กำลังแจ้งเตือนนักศึกษา...' : 'บันทึกว่าซ่อมเสร็จแล้ว & ส่งอีเมลแจ้งเตือน'}
         </button>
 
         <p className="text-[10px] text-slate-400 text-center leading-tight">
-          Instantly notifies <strong className="text-slate-600">{currentTicket.studentEmail}</strong> and SPU Facility Operations with certified before/after documentation.
+          ระบบจะส่งอีเมลแจ้งเตือนไปยัง <strong className="text-slate-600">{currentTicket.studentEmail}</strong> และฝ่ายอาคารสถานที่ SPU พร้อมแนบหลักฐานรูปถ่ายก่อนและหลังซ่อมทันที
         </p>
 
         {/* Bottom Save Draft & Handover Row */}
@@ -460,7 +460,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
             className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
           >
             <Save className="w-3.5 h-3.5" />
-            Save Draft
+            บันทึกแบบร่าง
           </button>
           <button
             type="button"
@@ -468,7 +468,7 @@ export const JobResolutionView: React.FC<JobResolutionViewProps> = ({
             className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
           >
             <ArrowRightLeft className="w-3.5 h-3.5" />
-            Handover Ticket
+            ส่งต่องานซ่อม
           </button>
         </div>
       </div>
