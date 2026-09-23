@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ViewSwitcherBar } from './components/layout/ViewSwitcherBar';
+import { ViewSwitcherBar, ScreenId } from './components/layout/ViewSwitcherBar';
 import { MobileHeader } from './components/layout/MobileHeader';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
 import { VirtualInboxModal } from './components/shared/VirtualInboxModal';
@@ -9,24 +9,29 @@ import { SubmissionFormView } from './features/reports/SubmissionFormView';
 import { MyReportsView } from './features/tracking/MyReportsView';
 import { TechnicianQueueView } from './features/technician/TechnicianQueueView';
 import { JobResolutionView } from './features/technician/JobResolutionView';
+import { AdminDashboard } from './features/analytics/AdminDashboard';
+import { AdminAccessGuard } from './components/shared/AdminAccessGuard';
 import {
   getTickets,
+  getRooms,
   getEmailNotifications,
   subscribeToStore,
   markEmailsAsRead
 } from './lib/storage';
-import { Ticket, EmailNotification } from './types';
-import { CURRENT_STUDENT, CURRENT_TECH } from './lib/mockData';
+import { Ticket, EmailNotification, UserRole } from './types';
+import { CURRENT_STUDENT, CURRENT_TECH, CURRENT_ADMIN } from './lib/mockData';
 
 export function App() {
   const [tickets, setTickets] = useState<Ticket[]>(getTickets());
   const [emails, setEmails] = useState<EmailNotification[]>(getEmailNotifications());
 
-  const [currentScreen, setCurrentScreen] = useState<'home' | 'submit' | 'track' | 'tech' | 'resolve'>('home');
+  const [currentScreen, setCurrentScreen] = useState<ScreenId>('admin');
+  const [currentUserRole, setCurrentUserRole] = useState<UserRole>('ADMIN');
+
   const [selectedTicket, setSelectedTicket] = useState<Ticket | undefined>(tickets[0]);
   const [selectedRoomId, setSelectedRoomId] = useState<string>('ROOM-SPU-11-502');
 
-  const [isMobileFrame, setIsMobileFrame] = useState(true);
+  const [isMobileFrame, setIsMobileFrame] = useState(false);
   const [isQrScannerOpen, setIsQrScannerOpen] = useState(false);
   const [isMailboxOpen, setIsMailboxOpen] = useState(false);
 
@@ -74,118 +79,144 @@ export function App() {
           markEmailsAsRead();
         }}
         unreadEmailCount={unreadEmailCount}
+        currentUserRole={currentUserRole}
+        onSelectRole={(role) => setCurrentUserRole(role)}
       />
 
       {/* Main Canvas Area */}
       <div className="flex-1 flex items-start justify-center p-0 sm:p-4 md:p-6 overflow-y-auto">
-        {/* Device Container Frame (Matches the UI mockups in the screenshots) */}
-        <div
-          className={`w-full bg-slate-50 transition-all flex flex-col overflow-hidden ${
-            isMobileFrame
-              ? 'max-w-[420px] rounded-none sm:rounded-[2.5rem] shadow-2xl border-0 sm:border-[8px] sm:border-slate-800 my-0 sm:my-3 min-h-screen sm:min-h-[850px]'
-              : 'max-w-4xl rounded-2xl shadow-xl border border-slate-200 my-4'
-          }`}
-        >
-          {/* Mobile Screen Header */}
-          {currentScreen !== 'tech' && currentScreen !== 'resolve' && (
-            <MobileHeader
-              title="ระบบแจ้งซ่อม SPU"
-              subtitle={
-                currentScreen === 'home'
-                  ? 'หน้าหลัก'
-                  : currentScreen === 'submit'
-                  ? 'แบบฟอร์มแจ้งซ่อม'
-                  : 'รายการแจ้งซ่อมของฉัน'
-              }
-              unreadCount={unreadEmailCount}
-              onOpenMailbox={() => {
-                setIsMailboxOpen(true);
-                markEmailsAsRead();
-              }}
-              avatarUrl={CURRENT_STUDENT.avatarUrl}
-              showBack={currentScreen === 'submit'}
-              onBack={() => setCurrentScreen('home')}
-            />
-          )}
-
-          {/* Screen Content */}
-          <div className="flex-1 p-4 md:p-5 overflow-y-auto">
-            {/* Screen 1: Reporting Hub (Home) */}
-            {currentScreen === 'home' && (
-              <HomeView
+        {/* If Admin Screen: render the full executive portal layout */}
+        {currentScreen === 'admin' ? (
+          <div
+            className={`w-full transition-all flex flex-col items-center justify-center my-0 sm:my-3 ${
+              isMobileFrame ? 'max-w-[420px]' : 'max-w-7xl'
+            }`}
+          >
+            {currentUserRole !== 'ADMIN' ? (
+              <AdminAccessGuard
+                currentRole={currentUserRole}
+                onSwitchToAdmin={() => setCurrentUserRole('ADMIN')}
+                onBackToHome={() => setCurrentScreen('home')}
+              />
+            ) : (
+              <AdminDashboard
                 tickets={tickets}
-                onStartReport={(roomId) => {
-                  if (roomId) setSelectedRoomId(roomId);
-                  setCurrentScreen('submit');
-                }}
-                onOpenQrScanner={() => setIsQrScannerOpen(true)}
-                onSelectTicket={handleOpenTicket}
-                onViewAllReports={() => setCurrentScreen('track')}
+                rooms={getRooms()}
+                onOpenTicket={handleOpenTicket}
+                onLogoutOrSwitch={() => setCurrentUserRole('STUDENT')}
               />
             )}
-
-            {/* Screen 2: Issue Form (Submission) */}
-            {currentScreen === 'submit' && (
-              <SubmissionFormView
-                initialRoomId={selectedRoomId}
-                onOpenQrScanner={() => setIsQrScannerOpen(true)}
-                onTicketSubmitted={(ticketId) => {
-                  handleOpenTicket(ticketId);
+          </div>
+        ) : (
+          /* Mobile / Device Frame Container for Student & Technician views */
+          <div
+            className={`w-full bg-slate-50 transition-all flex flex-col overflow-hidden ${
+              isMobileFrame
+                ? 'max-w-[420px] rounded-none sm:rounded-[2.5rem] shadow-2xl border-0 sm:border-[8px] sm:border-slate-800 my-0 sm:my-3 min-h-screen sm:min-h-[850px]'
+                : 'max-w-4xl rounded-2xl shadow-xl border border-slate-200 my-4'
+            }`}
+          >
+            {/* Mobile Screen Header */}
+            {currentScreen !== 'tech' && currentScreen !== 'resolve' && (
+              <MobileHeader
+                title="ระบบแจ้งซ่อม SPU"
+                subtitle={
+                  currentScreen === 'home'
+                    ? 'หน้าหลัก'
+                    : currentScreen === 'submit'
+                    ? 'แบบฟอร์มแจ้งซ่อม'
+                    : 'รายการแจ้งซ่อมของฉัน'
+                }
+                unreadCount={unreadEmailCount}
+                onOpenMailbox={() => {
+                  setIsMailboxOpen(true);
+                  markEmailsAsRead();
                 }}
+                avatarUrl={CURRENT_STUDENT.avatarUrl}
+                showBack={currentScreen === 'submit'}
                 onBack={() => setCurrentScreen('home')}
               />
             )}
 
-            {/* Screen 3: My Reports (Tracking) */}
-            {currentScreen === 'track' && (
-              <MyReportsView
-                tickets={tickets}
-                onSelectTicket={handleOpenTicket}
-                onContactTech={(ticket) => handleOpenResolution(ticket)}
-                onViewBeforeAfter={(ticket) => handleOpenResolution(ticket)}
-              />
-            )}
+            {/* Screen Content */}
+            <div className="flex-1 p-4 md:p-5 overflow-y-auto">
+              {/* Screen 1: Reporting Hub (Home) */}
+              {currentScreen === 'home' && (
+                <HomeView
+                  tickets={tickets}
+                  onStartReport={(roomId) => {
+                    if (roomId) setSelectedRoomId(roomId);
+                    setCurrentScreen('submit');
+                  }}
+                  onOpenQrScanner={() => setIsQrScannerOpen(true)}
+                  onSelectTicket={handleOpenTicket}
+                  onViewAllReports={() => setCurrentScreen('track')}
+                />
+              )}
 
-            {/* Screen 4: Technician Task Queue */}
-            {currentScreen === 'tech' && (
-              <TechnicianQueueView
-                tickets={tickets}
-                onOpenTicket={handleOpenTicket}
-                onOpenResolution={handleOpenResolution}
-                onRefresh={() => setTickets([...getTickets()])}
-              />
-            )}
+              {/* Screen 2: Issue Form (Submission) */}
+              {currentScreen === 'submit' && (
+                <SubmissionFormView
+                  initialRoomId={selectedRoomId}
+                  onOpenQrScanner={() => setIsQrScannerOpen(true)}
+                  onTicketSubmitted={(ticketId) => {
+                    handleOpenTicket(ticketId);
+                  }}
+                  onBack={() => setCurrentScreen('home')}
+                />
+              )}
 
-            {/* Screen 5: Job Update & Resolution */}
-            {currentScreen === 'resolve' && (
-              <JobResolutionView
-                ticket={selectedTicket}
-                onBack={() => setCurrentScreen('tech')}
-                onResolved={() => {
-                  setTickets([...getTickets()]);
-                  setCurrentScreen('track');
-                }}
+              {/* Screen 3: My Reports (Tracking) */}
+              {currentScreen === 'track' && (
+                <MyReportsView
+                  tickets={tickets}
+                  onSelectTicket={handleOpenTicket}
+                  onContactTech={(ticket) => handleOpenResolution(ticket)}
+                  onViewBeforeAfter={(ticket) => handleOpenResolution(ticket)}
+                />
+              )}
+
+              {/* Screen 4: Technician Task Queue */}
+              {currentScreen === 'tech' && (
+                <TechnicianQueueView
+                  tickets={tickets}
+                  onOpenTicket={handleOpenTicket}
+                  onOpenResolution={handleOpenResolution}
+                  onRefresh={() => setTickets([...getTickets()])}
+                />
+              )}
+
+              {/* Screen 5: Job Update & Resolution */}
+              {currentScreen === 'resolve' && (
+                <JobResolutionView
+                  ticket={selectedTicket}
+                  onBack={() => setCurrentScreen('tech')}
+                  onResolved={() => {
+                    setTickets([...getTickets()]);
+                    setCurrentScreen('track');
+                  }}
+                />
+              )}
+            </div>
+
+            {/* Mobile Bottom Navigation (Shown on Home & Tracking) */}
+            {(currentScreen === 'home' || currentScreen === 'track') && (
+              <MobileBottomNav
+                currentView={currentScreen}
+                onNavigate={(view) => setCurrentScreen(view as any)}
+                onOpenQrScanner={() => setIsQrScannerOpen(true)}
+                activeReportsCount={
+                  tickets.filter(
+                    (t) =>
+                      t.status === 'IN_PROGRESS' ||
+                      t.status === 'PENDING' ||
+                      t.status === 'PENDING_REVIEW'
+                  ).length
+                }
               />
             )}
           </div>
-
-          {/* Mobile Bottom Navigation (Shown on Home & Tracking) */}
-          {(currentScreen === 'home' || currentScreen === 'track') && (
-            <MobileBottomNav
-              currentView={currentScreen}
-              onNavigate={(view) => setCurrentScreen(view as any)}
-              onOpenQrScanner={() => setIsQrScannerOpen(true)}
-              activeReportsCount={
-                tickets.filter(
-                  (t) =>
-                    t.status === 'IN_PROGRESS' ||
-                    t.status === 'PENDING' ||
-                    t.status === 'PENDING_REVIEW'
-                ).length
-              }
-            />
-          )}
-        </div>
+        )}
       </div>
 
       {/* QR Scanner Modal */}

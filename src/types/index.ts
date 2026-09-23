@@ -101,11 +101,14 @@ export interface EmailNotification {
   isRead: boolean;
 }
 
+export type UserRole = 'STUDENT' | 'TECHNICIAN' | 'ADMIN';
+
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'STUDENT' | 'TECHNICIAN' | 'ADMIN';
+  role: UserRole;
   department: string;
   avatarUrl?: string;
 }
+

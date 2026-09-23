@@ -61,6 +61,16 @@ export const CURRENT_TECH: User = {
   avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
 };
 
+export const CURRENT_ADMIN: User = {
+  id: 'ADMIN-DIR-01',
+  name: 'Praew (แพรว สุขสมบูรณ์)',
+  email: 'praew.director@spu.ac.th',
+  role: 'ADMIN',
+  department: 'ผู้อำนวยการฝ่ายบริหารอาคารสถานที่ (Operations Director)',
+  avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80'
+};
+
+
 export function createSamplePhoto(title: string, color: string, iconType: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
     <defs>
